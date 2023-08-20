@@ -1,0 +1,5 @@
+## Lista de Exercícios 01
+Nessa lista, trabalhamos com o tratamento de arquivos .txt relembrando alguns comandos em java.
+1. Crie uma classe Java para receber via argumento de linha de comando um caminho/nome de um arquivo em formato texto e, em seguida, listar as 10 primeiras linhas do arquivo selecionado. Algo semelhante ao que faz o comando **head** do Linux.
+2. Crie uma classe Java para receber via argumento de linha de comando: (1) um caminho/nome de um arquivo em formato texto e (2) uma string S. Ao executar, a classe deve exibir somente as linhas do arquivo que tenham a string S como substring. Algo semelhante ao que faz o comando **grep** do Linux.
+3. Crie uma classe Java para receber via argumento de linha de comando os caminhos/nomes de 2 arquivos em formato texto e, em seguida, listar todas as linhas de ambos os arquivos. Algo semelhante ao que faz o comando **cat** do Linux.

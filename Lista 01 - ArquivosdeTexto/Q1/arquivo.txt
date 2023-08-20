@@ -1,0 +1,10 @@
+O Reconhecimento Automático de Fala (ASR) é essencial para muitas aplicações, como a geração automática de legendas
+para vídeos, pesquisa por voz, comandos de voz para casas inteligentes e chatbots. Devido à crescente popularidade desses
+aplicações e os avanços em modelos de aprendizagem profunda para transcrição de fala em texto, este trabalho tem como objetivo avaliar a
+desempenho de soluções comerciais para ASR que utilizam modelos de deep learning, como Facebook Wit.ai, Microsoft AzureSpeech,
+Google Cloud Speech-to-Text, Wav2Vec e AWS Transcribe. Realizamos os experimentos com dois conjuntos de dados reais e públicos,
+o Mozilla Common Voice e o Voxforge. Os resultados demonstram que as soluções avaliadas
+diferem ligeiramente. No entanto, o Facebook Wit.ai supera as outras abordagens analisadas para as métricas de qualidade coletadas
+como WER, BLEU e METEOR. Também experimentamos ajustar a Jasper Neural Network para ASR com quatro conjuntos de dados
+diferentes sem interseção com os que coletamos as métricas de qualidade. Estudamos o desempenho do modelo Jasper
+para os dois conjuntos de dados públicos, comparando seus resultados com os outros modelos pré-treinados.
