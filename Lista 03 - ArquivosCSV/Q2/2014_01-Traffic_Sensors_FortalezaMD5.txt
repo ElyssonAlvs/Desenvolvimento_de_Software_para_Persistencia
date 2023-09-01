@@ -1,0 +1,3 @@
+MD5 hash de 2014_01-Traffic_Sensors_Fortaleza.csv:
+75c9e7b5dd6548ebf9d879937905931c
+CertUtil: -hashfile : comando conclu?do com ?xito.

@@ -1,0 +1,3 @@
+SHA1 hash de 2014_01-Traffic_Sensors_Fortaleza.csv:
+aa0cca517cc4261cb28a8b0829e6e75e8ecd589d
+CertUtil: -hashfile : comando conclu?do com ?xito.
