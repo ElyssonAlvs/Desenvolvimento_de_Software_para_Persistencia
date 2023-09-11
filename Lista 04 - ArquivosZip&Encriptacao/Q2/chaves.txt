@@ -1,0 +1,2 @@
+teste.txt -> 123456
+teste02.txt -> 654321
