@@ -1,0 +1,7 @@
+teste
+de
+leitura de
+arquivos
+em
+.ZIP
+oi
