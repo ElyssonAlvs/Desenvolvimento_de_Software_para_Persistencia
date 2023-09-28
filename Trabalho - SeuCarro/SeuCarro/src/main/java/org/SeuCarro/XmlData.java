@@ -1,3 +1,5 @@
+package org.SeuCarro;
+
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
