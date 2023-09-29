@@ -9,10 +9,10 @@ import java.util.List;
 
 public class XmlData {
     // Nome do arquivo CSV de entrada
-    private static final String NOME_ARQUIVO_CSV = "carros.csv";
+    //private static final String NOME_ARQUIVO_CSV = "carros.csv";
 
     // Nome do arquivo XML de saída
-    private static final String NOME_ARQUIVO_XML = "carros.xml";
+    //private static final String NOME_ARQUIVO_XML = "carros.xml";
 
     // Método para converter dados do arquivo CSV para XML
     public static void converterParaXml(List<Carro> carros, String nomeArquivo) throws IOException {
@@ -23,7 +23,7 @@ public class XmlData {
         // Escreve o XML no arquivo de saída especificado
         xmlMapper.writeValue(new File(nomeArquivo), carros);
 
-        System.out.println("Conversão para XML concluída. Arquivo: " + nomeArquivo);
+        //System.out.println("Conversão para XML concluída. Arquivo: " + nomeArquivo);
     }
 
 }

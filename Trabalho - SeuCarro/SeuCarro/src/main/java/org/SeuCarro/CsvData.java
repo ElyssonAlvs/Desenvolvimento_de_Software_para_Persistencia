@@ -19,13 +19,14 @@ public class CsvData {
             // Abre o arquivo CSV no modo de acrescentar (append) para adicionar novos dados
 
             // Constrói uma linha CSV com os dados do carro
-            String linha = format("%d,%s,%s,%s,%d,%s",
+            String linha = format("%d,%s,%s,%s,%d,%s,%d",
                     carro.getIdCarro(),            // ID do carro
                     carro.getModelo(),             // Modelo do carro
                     carro.getMarca(),              // Marca do carro
                     carro.getConfiguracao(),       // Configuração do carro
                     carro.getAnoFabricacao(),      // Ano de fabricação do carro
                     carro.getTipoCombustivel());   // Tipo de combustível do carro
+                    carro.getpreco();              // Preço do carro
 
             // Escreve a linha no arquivo CSV
             writer.println(linha);

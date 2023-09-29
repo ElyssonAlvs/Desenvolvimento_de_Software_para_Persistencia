@@ -1,27 +1,29 @@
 package org.SeuCarro;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable {
     private int IdCarro;
     private String modelo;
     private String marca;
     private String configuracao;
     private int AnoFabricacao;
     private String TipoCombustivel;
+    private double preco;
 
     // Construtor com todos os atributos
-    public Carro(int id_carro, String modelo, String marca, String configuracao, int AnoFabricacao, String TipoCombustivel) {
+    public Carro(int id_carro, String modelo, String marca, String configuracao, int AnoFabricacao, String TipoCombustivel, double preco) {
         this.IdCarro = id_carro;
         this.modelo = modelo;
         this.marca = marca;
         this.configuracao = configuracao;
         this.AnoFabricacao = AnoFabricacao;
         this.TipoCombustivel = TipoCombustivel;
+        this.preco = preco;
     }
 
     // Construtor padrão (default)
-    public Carro() {
-        // Você pode inicializar valores padrão aqui, se necessário.
-    }
+    public Carro() {}
 
     // Getters e setters para todos os atributos
     public int getIdCarro() {
@@ -72,6 +74,14 @@ public class Carro {
         this.TipoCombustivel = TipoCombustivel;
     }
 
+    public double getpreco(){
+        return preco;
+    }
+
+    public void setpreco(int preco){
+        this.preco = preco;
+    }
+
     @Override
     public String toString() {
         return "Carro{" +
@@ -81,6 +91,7 @@ public class Carro {
                 ", configuracao='" + configuracao + '\'' +
                 ", AnoFabricacao=" + AnoFabricacao +
                 ", TipoCombustivel='" + TipoCombustivel + '\'' +
+                ", Preco=R$'" + preco + '\'' +
                 '}';
     }
 }

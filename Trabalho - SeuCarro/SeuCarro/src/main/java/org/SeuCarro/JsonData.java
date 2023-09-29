@@ -20,6 +20,6 @@ public class JsonData {
         // Escreve o JSON no arquivo de saída
         objectMapper.writeValue(new File(NOME_ARQUIVO_JSON), carros);
 
-        System.out.println("Conversão para JSON concluída.");
+        //System.out.println("Conversão para JSON concluída.");
     }
 }

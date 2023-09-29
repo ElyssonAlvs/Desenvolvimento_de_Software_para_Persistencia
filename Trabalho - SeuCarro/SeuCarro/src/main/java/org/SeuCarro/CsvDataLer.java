@@ -22,7 +22,7 @@ public class CsvDataLer {
                 String[] partes = linha.split(","); // Divide a linha em partes usando ',' como separador
 
                 // Verifica se a linha contém exatamente 6 partes (os atributos do objeto Carro)
-                if (partes.length == 6) {
+                if (partes.length == 7) {
                     // Converte as partes em valores apropriados para criar um objeto Carro
                     int id = Integer.parseInt(partes[0]);
                     String modelo = partes[1];
@@ -30,9 +30,10 @@ public class CsvDataLer {
                     String configuracao = partes[3];
                     int anoFabricacao = Integer.parseInt(partes[4]);
                     String tipoCombustivel = partes[5];
+                    double preco = Double.parseDouble(partes[6]);
 
                     // Cria um objeto Carro com os valores extraídos e adiciona à lista de carros
-                    Carro carro = new Carro(id, modelo, marca, configuracao, anoFabricacao, tipoCombustivel);
+                    Carro carro = new Carro(id, modelo, marca, configuracao, anoFabricacao, tipoCombustivel,preco);
                     carros.add(carro);
                 }
             }
