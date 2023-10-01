@@ -1,0 +1,4 @@
+Elysson -> Inserir entidade,Monstrar quantidade
+converter JSON
+Gustavo -> Converter XML, Compactar para ZIP,
+Calcular o HASH256

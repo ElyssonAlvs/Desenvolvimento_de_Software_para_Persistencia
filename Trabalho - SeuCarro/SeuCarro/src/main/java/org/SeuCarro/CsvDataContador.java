@@ -3,7 +3,7 @@ package org.SeuCarro;
 import java.io.*;
 
 public class CsvDataContador {
-    // Diratório e nome do arquivo CSV que será lido
+    // Diretório e nome do arquivo CSV que será lido
     private static final String NOME_ARQUIVO_CSV = "carros.csv";
 
     // Método para contar entidades no arquivo CSV
