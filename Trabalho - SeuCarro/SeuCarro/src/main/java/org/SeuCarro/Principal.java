@@ -41,7 +41,7 @@ public class Principal {
                             System.out.print("Tipo de Combustível: ");
                             String tipoCombustivel = scanner.nextLine();
                             System.out.print("Preço do veículo: ");
-                            Double preco = scanner.nextDouble();
+                            double preco = scanner.nextDouble();
 
                             // Crie um objeto Carro com os dados fornecidos
                             Carro carro = new Carro(idCarro, modelo, marca, configuracao, anoFabricacao, tipoCombustivel,preco);
