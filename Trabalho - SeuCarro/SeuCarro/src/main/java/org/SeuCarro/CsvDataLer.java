@@ -21,7 +21,7 @@ public class CsvDataLer {
             while ((linha = br.readLine()) != null) {
                 String[] partes = linha.split(","); // Divide a linha em partes usando ',' como separador
 
-                // Verifica se a linha contém exatamente 6 partes (os atributos do objeto Carro)
+                // Verifica se a linha contém exatamente 7 partes (os atributos do objeto Carro)
                 if (partes.length == 7) {
                     // Converte as partes em valores apropriados para criar um objeto Carro
                     int id = Integer.parseInt(partes[0]);
@@ -37,6 +37,8 @@ public class CsvDataLer {
                     carros.add(carro);
                 }
             }
+        }catch (IOException e){
+            System.out.println("Erro ao ler o arquivo csv " + e.getMessage());
         }
 
         // Retorna a lista de carros lidos do arquivo CSV

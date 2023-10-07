@@ -1,0 +1,4 @@
+Personalizar o JSON
+Implementar um CRUD
+Criar um interface (talvez)
+Tornar o código mais adaptativo

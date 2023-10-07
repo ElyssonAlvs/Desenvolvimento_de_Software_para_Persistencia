@@ -1,0 +1,209 @@
+[ {
+  "modelo" : "Toyota",
+  "marca" : "Corolla",
+  "configuracao" : "Sedan",
+  "preco" : 24500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 1,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Honda",
+  "marca" : "Civic",
+  "configuracao" : "Sedan",
+  "preco" : 23500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 2,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Ford",
+  "marca" : "Fiesta",
+  "configuracao" : "Hatchback",
+  "preco" : 18900.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 3,
+  "anoFabricacao" : 2021
+}, {
+  "modelo" : "Chevrolet",
+  "marca" : "Cruze",
+  "configuracao" : "Sedan",
+  "preco" : 26500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 4,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Volkswagen",
+  "marca" : "Golf",
+  "configuracao" : "Hatchback",
+  "preco" : 19800.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 5,
+  "anoFabricacao" : 2021
+}, {
+  "modelo" : "Hyundai",
+  "marca" : "Elantra",
+  "configuracao" : "Sedan",
+  "preco" : 25500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 6,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Toyota",
+  "marca" : "Rav4",
+  "configuracao" : "SUV",
+  "preco" : 32000.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 7,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Honda",
+  "marca" : "HR-V",
+  "configuracao" : "SUV",
+  "preco" : 27500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 8,
+  "anoFabricacao" : 2021
+}, {
+  "modelo" : "Nissan",
+  "marca" : "Altima",
+  "configuracao" : "Sedan",
+  "preco" : 24900.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 9,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Ford",
+  "marca" : "Escape",
+  "configuracao" : "SUV",
+  "preco" : 29500.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 10,
+  "anoFabricacao" : 2021
+}, {
+  "modelo" : "Fiat",
+  "marca" : "Argo",
+  "configuracao" : "Hatchback",
+  "preco" : 21500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 11,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Volkswagen",
+  "marca" : "Polo",
+  "configuracao" : "Hatchback",
+  "preco" : 22500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 12,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Chevrolet",
+  "marca" : "Onix",
+  "configuracao" : "Hatchback",
+  "preco" : 20500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 13,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Hyundai",
+  "marca" : "HB20",
+  "configuracao" : "Hatchback",
+  "preco" : 21500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 14,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Renault",
+  "marca" : "Kwid",
+  "configuracao" : "Hatchback",
+  "preco" : 14900.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 15,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Fiat",
+  "marca" : "Mobi",
+  "configuracao" : "Hatchback",
+  "preco" : 13900.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 16,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Chevrolet",
+  "marca" : "Onix Plus",
+  "configuracao" : "Sedan",
+  "preco" : 21500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 17,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Volkswagen",
+  "marca" : "Virtus",
+  "configuracao" : "Sedan",
+  "preco" : 22500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 18,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Hyundai",
+  "marca" : "HB20S",
+  "configuracao" : "Sedan",
+  "preco" : 21500.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 19,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Renault",
+  "marca" : "Sandero",
+  "configuracao" : "Sedan",
+  "preco" : 14900.0,
+  "tipoCombustivel" : "Etanol",
+  "idCarro" : 20,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Panamera",
+  "marca" : "Porsche",
+  "configuracao" : "Automatica",
+  "preco" : 689000.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 21,
+  "anoFabricacao" : 2023
+}, {
+  "modelo" : "VOLKSWAGEN GOL CL 1.6 MI 2P E 4P",
+  "marca" : "VolksWagen",
+  "configuracao" : "Manual",
+  "preco" : 31990.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 22,
+  "anoFabricacao" : 1996
+}, {
+  "modelo" : "Taycan",
+  "marca" : "Porsche",
+  "configuracao" : "Automático",
+  "preco" : 709990.0,
+  "tipoCombustivel" : "Elétrico",
+  "idCarro" : 23,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Palio",
+  "marca" : "Fiat",
+  "configuracao" : "Manual",
+  "preco" : 34900.0,
+  "tipoCombustivel" : "Gasolina e álcool",
+  "idCarro" : 24,
+  "anoFabricacao" : 2013
+}, {
+  "modelo" : "Strada",
+  "marca" : "Fiat",
+  "configuracao" : "1.4 FIRE FLEX ENDURANCE CS MANUAL",
+  "preco" : 79590.0,
+  "tipoCombustivel" : "Gasolina e álcool",
+  "idCarro" : 25,
+  "anoFabricacao" : 2022
+}, {
+  "modelo" : "Uno",
+  "marca" : "Fiat",
+  "configuracao" : "Manual",
+  "preco" : 20000.0,
+  "tipoCombustivel" : "Gasolina",
+  "idCarro" : 26,
+  "anoFabricacao" : 2004
+} ]

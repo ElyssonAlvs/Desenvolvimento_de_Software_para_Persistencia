@@ -26,9 +26,11 @@ public class ZipData {
                 while ((bytesRead = bufferedInputStream.read(buffer)) != -1) {
                     zipOutputStream.write(buffer, 0, bytesRead);
                 }
+            }catch(IOException e){
+                System.out.println(e.getMessage());
             }
-
-            System.out.println("Compactação para ZIP concluída: " + nomeArquivoZip + " criado.");
+        }catch(IOException e){
+            System.out.println(e.getMessage());
         }
     }
 }
