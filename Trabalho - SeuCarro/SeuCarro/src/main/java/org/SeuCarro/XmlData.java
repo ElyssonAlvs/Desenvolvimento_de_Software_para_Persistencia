@@ -2,6 +2,8 @@ package org.SeuCarro;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.SeuCarro.Entity.Carro;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;

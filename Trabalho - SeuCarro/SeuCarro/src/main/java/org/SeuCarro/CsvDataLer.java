@@ -1,5 +1,7 @@
 package org.SeuCarro;
 
+import org.SeuCarro.Entity.Carro;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

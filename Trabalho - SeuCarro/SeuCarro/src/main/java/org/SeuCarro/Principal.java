@@ -1,5 +1,7 @@
 package org.SeuCarro;
 
+import org.SeuCarro.Entity.Carro;
+
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;

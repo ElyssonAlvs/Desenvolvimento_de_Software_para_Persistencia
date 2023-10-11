@@ -1,5 +1,7 @@
 package org.SeuCarro;
 
+import org.SeuCarro.Entity.Carro;
+
 import java.io.FileWriter;
 import java.io.*;
 import java.io.PrintWriter;
@@ -26,7 +28,7 @@ public class CsvData {
                     carro.getConfiguracao(),       // Configuração do carro
                     carro.getAnoFabricacao(),      // Ano de fabricação do carro
                     carro.getTipoCombustivel(),    // Tipo de combustível do carro
-                    carro.getpreco());             // Preço do carro
+                    carro.getPreco());             // Preço do carro
 
             // Escreve a linha no arquivo CSV
             writer.println(linha);
