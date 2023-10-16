@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto {
-    int id;              // Identificador único do produto
-    int codigo;          // Código do produto
-    String descricao;    // Descrição do produto
-    BigDecimal preco;    // Preço do produto (usando BigDecimal para representar números decimais com precisão)
-    int quantidade;      // Quantidade em estoque do produto
-    String ultimaEntrada; // Data da última entrada do produto no estoque
+    private int id;              // Identificador único do produto
+    private int codigo;          // Código do produto
+    private String descricao;    // Descrição do produto
+    private BigDecimal preco;    // Preço do produto (usando BigDecimal para representar números decimais com precisão)
+    private int quantidade;      // Quantidade em estoque do produto
+    private String ultimaEntrada; // Data da última entrada do produto no estoque
 }

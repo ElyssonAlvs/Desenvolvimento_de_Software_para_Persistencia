@@ -201,23 +201,32 @@ public class Principal {
     }
 
     public static void listaProdutos(List<Produto> produtos) {
-        // Inicializa um StringBuilder para construir uma lista de produtos
+        // Inicializa um StringBuilder para construir a lista de produtos
         StringBuilder listagem = new StringBuilder();
 
         for (Produto cl : produtos) {
             // Adiciona informações do produto atual ao StringBuilder
-            listagem.append("ID: ").append(cl.getId()).append("\n"); // Adiciona o ID do produto à lista.
-            listagem.append("Código: ").append(cl.getCodigo()).append("\n"); // Adiciona o código do produto à lista.
-            listagem.append("Descrição: ").append(cl.getDescricao()).append("\n"); // Adiciona a descrição do produto à lista.
-            listagem.append("Preço: ").append(cl.getPreco()).append("\n"); // Adiciona o preço do produto à lista.
-            listagem.append("Quantidade: ").append(cl.getQuantidade()).append("\n"); // Adiciona a quantidade do produto à lista.
-            listagem.append("Última Entrada: ").append(cl.getUltimaEntrada()).append("\n"); // Adiciona a data de última entrada do produto à lista.
-            listagem.append("------------------------------\n"); // Adiciona uma linha separadora entre os produtos.
+            listagem.append("ID: ").append(cl.getId()).append("\n");
+            listagem.append("Código: ").append(cl.getCodigo()).append("\n");
+            listagem.append("Descrição: ").append(cl.getDescricao()).append("\n");
+            listagem.append("Preço: ").append(cl.getPreco()).append("\n");
+            listagem.append("Quantidade: ").append(cl.getQuantidade()).append("\n");
+            listagem.append("Última Entrada: ").append(cl.getUltimaEntrada()).append("\n");
+            listagem.append("------------------------------\n");
         }
 
-        // Exibe a lista de produtos em uma caixa de diálogo, verificando se a lista não está vazia
-        JOptionPane.showMessageDialog(null, listagem.length() == 0 ? "Nenhum produto encontrado" : listagem.toString());
+        // Cria uma área de texto rolável com o conteúdo da lista
+        JTextArea textArea = new JTextArea(20, 40); // Número de linhas e colunas visíveis
+        textArea.setText(listagem.toString()); // Define o texto na área de texto
+        textArea.setEditable(false); // Torna a área de texto somente leitura
+
+        // Adiciona a área de texto a um painel de rolagem
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        // Exibe a lista de produtos em uma caixa de diálogo com barra de rolagem
+        JOptionPane.showMessageDialog(null, scrollPane, "Lista de Produtos", JOptionPane.PLAIN_MESSAGE);
     }
+
 
     public static void listaProduto(Produto cl) {
         if (cl == null) { // Verifica se o objeto Produto é nulo.
