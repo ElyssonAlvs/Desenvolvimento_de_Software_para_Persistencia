@@ -195,10 +195,14 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
             con = ConnectionFactory.getConnection();
             PreparedStatement pst;
 
-            // Consulta SQL para selecionar produtos na tabela "produtos" com uma descrição específica
-            String sql = "select id, codigo, descricao, preco, quantidade, ultima_entrada from produtos where descricao = ?";
+            // Consulta SQL para selecionar produtos na tabela "produtos" com correspondência parcial na descrição
+            String sql = "SELECT id, codigo, descricao, preco, quantidade, ultima_entrada FROM produtos WHERE descricao LIKE ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1, descricao); // Define o parâmetro de descrição na consulta SQL
+
+            // Define o parâmetro de descrição na consulta SQL com a correspondência parcial
+            String descricaoPesquisa = "%" + descricao + "%";
+            pst.setString(1, descricaoPesquisa);
+
             ResultSet rs = pst.executeQuery();
 
             // Itera pelos resultados do ResultSet
@@ -216,7 +220,7 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
                 throw new DAOException("Não foi possível fechar a conexão.", e);
             }
         }
-        return produtos; // Retorna a lista de produtos com a descrição especificada encontrados no banco de dados
+        return produtos; // Retorna a lista de produtos com correspondência parcial na descrição encontrados no banco de dados
     }
 
     public Produto findByCodigo(int codigo) {
