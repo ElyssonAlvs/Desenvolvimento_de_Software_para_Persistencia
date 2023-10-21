@@ -23,8 +23,7 @@ public class ProdutoSpringJDBCDAO implements ProdutoDAO {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	public ProdutoSpringJDBCDAO() {
-	}
+	public ProdutoSpringJDBCDAO() {}
 
 	@Override
 	public void save(Produto entity) {
