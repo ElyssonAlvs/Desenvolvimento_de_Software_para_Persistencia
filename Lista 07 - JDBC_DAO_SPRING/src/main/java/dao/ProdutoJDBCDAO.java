@@ -16,17 +16,17 @@ import org.springframework.stereotype.Repository;
 import entity.Produto;
 
 
-@Repository
+@Repository // Marca a classe como um componente gerenciado pelo Spring
 public class ProdutoJDBCDAO implements ProdutoDAO {
 
-    @Autowired
+    @Autowired // Injeção de dependência para o DataSource. O Spring fornecerá a instância adequada.
     private DataSource dataSource;
 
-    public ProdutoJDBCDAO() {
-    }
+    public ProdutoJDBCDAO() {}
 
     public void save(Produto entity) {
         try (Connection con = dataSource.getConnection()) {
+            // SQL para inserir ou atualizar um produto
             String insert_sql = "INSERT INTO produtos (codigo, descricao, preco, quantidade, ultima_entrada) VALUES (?, ?, ?, ?, ?)";
             String update_sql = "UPDATE produtos SET codigo = ?, descricao = ?, preco = ?, quantidade = ?, ultima_entrada = ? WHERE id = ?";
             PreparedStatement pst;
@@ -36,6 +36,7 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
                 pst = con.prepareStatement(update_sql);
                 pst.setInt(6, entity.getId());
             }
+            // Preenche os valores do PreparedStatement
             pst.setInt(1, entity.getCodigo());
             pst.setString(2, entity.getDescricao());
             pst.setDouble(3, entity.getPreco().doubleValue());
@@ -45,7 +46,7 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
             java.util.Date date = sdf.parse(entity.getUltimaEntrada());
             pst.setDate(5, new java.sql.Date(date.getTime()));
 
-            pst.executeUpdate();
+            pst.executeUpdate(); // Executa a inserção ou atualização
         } catch (SQLException | ParseException e) {
             throw new DAOException("Operação não realizada com sucesso.", e);
         }
@@ -53,10 +54,11 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
 
     public void delete(int codigo) {
         try (Connection con = dataSource.getConnection()) {
+            // SQL para excluir um produto com base no código
             String sql = "DELETE FROM produtos WHERE codigo = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, codigo);
-            pst.executeUpdate();
+            pst.executeUpdate(); // Execute a exclusão
         } catch (SQLException e) {
             throw new DAOException("Operação não realizada com sucesso.", e);
         }
@@ -64,6 +66,7 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
 
     public Produto find(int id) {
         try (Connection con = dataSource.getConnection()) {
+            // SQL para buscar um produto com base no ID
             String sql = "SELECT id, codigo, descricao, preco, quantidade, ultima_entrada FROM produtos WHERE id = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, id);
@@ -76,7 +79,7 @@ public class ProdutoJDBCDAO implements ProdutoDAO {
         }
         return null;
     }
-
+    // Método para mapear o resultado de uma consulta para um objeto Produto
     private Produto map(ResultSet rs) throws SQLException {
         Produto cl = new Produto();
         cl.setId(rs.getInt("id"));
