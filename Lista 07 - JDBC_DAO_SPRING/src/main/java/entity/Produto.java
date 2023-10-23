@@ -3,11 +3,14 @@ package entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Produto {
     private int id;              // Identificador único do produto
     private int codigo;          // Código do produto

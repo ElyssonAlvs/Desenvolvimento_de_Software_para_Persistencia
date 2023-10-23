@@ -16,7 +16,7 @@ import entity.Produto;
 import lombok.extern.slf4j.Slf4j;
 
 @Repository
-@Primary
+@Primary // Classe preferida para o Spring
 @Slf4j
 public class ProdutoSpringJDBCDAO implements ProdutoDAO {
 

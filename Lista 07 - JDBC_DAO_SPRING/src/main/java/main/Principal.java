@@ -19,12 +19,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "dao")
-@Slf4j
+@Slf4j // Gerar saídas na ocorrência de erro
 public class Principal implements CommandLineRunner {
 
-    @Autowired
+    @Autowired // Spring cuida do ciclo de vida do objeto
     private ProdutoDAO baseProdutos;
-
 
     public static void main(String[] args) {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(Principal.class);
@@ -183,7 +182,7 @@ public class Principal implements CommandLineRunner {
         // Adiciona a área de texto a um painel de rolagem
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        // Exibe a lista de produtos em uma caixa de diálogo com barra de rolagem
+        // Exibe a lista de produtos numa caixa de diálogo com barra de rolagem
         JOptionPane.showMessageDialog(null, scrollPane, "Lista de Produtos", JOptionPane.PLAIN_MESSAGE);
     }
 
