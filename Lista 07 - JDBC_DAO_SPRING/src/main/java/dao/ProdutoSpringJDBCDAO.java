@@ -113,16 +113,17 @@ public class ProdutoSpringJDBCDAO implements ProdutoDAO {
 
 	@Override
 	public List<Produto> findByDescricao(String descricao) {
-		// Define a consulta SQL para buscar produtos por descrição
-		String sql = "SELECT id, codigo, descricao, preco, quantidade, ultima_entrada FROM produtos WHERE descricao = :descricao";
+		// Define a consulta SQL para buscar produtos por descrição usando o operador LIKE
+		String sql = "SELECT id, codigo, descricao, preco, quantidade, ultima_entrada FROM produtos WHERE descricao LIKE :descricao";
 
 		// Cria um objeto MapSqlParameterSource com a descrição como parâmetro
 		MapSqlParameterSource params = new MapSqlParameterSource()
-				.addValue("descricao", descricao);
+				.addValue("descricao", "%" + descricao + "%"); // Adiciona % antes e depois da descrição
 
 		// Executa a consulta e mapeia o resultado para uma lista de objetos Produto
 		return jdbcTemplate.query(sql, params, (rs, rowNum) -> map(rs));
 	}
+
 
 	@Override
 	public List<Produto> findByPreco(double preco) {
