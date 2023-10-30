@@ -8,9 +8,7 @@ public class GenericJPADAO<T> implements GenericDAO<T> {
     protected Class<T> persistentClass;
 
     // Construtor da classe que recebe a classe persistente como parâmetro.
-    public GenericJPADAO(Class<T> persistentClass) {
-        this.persistentClass = persistentClass;
-    }
+    public GenericJPADAO(Class<T> persistentClass) { this.persistentClass = persistentClass; }
 
     // Método para salvar uma entidade no banco de dados.
     public void save(T entity) {
@@ -43,9 +41,7 @@ public class GenericJPADAO<T> implements GenericDAO<T> {
     }
 
     // Método para encontrar uma entidade pelo seu ID no banco de dados.
-    public T find(Object id) {
-        return getEm().find(persistentClass, id);
-    }
+    public T find(Object id) { return getEm().find(persistentClass, id); }
 
     // Método para buscar todas as entidades da classe persistente.
     public List<T> find() {
@@ -55,25 +51,13 @@ public class GenericJPADAO<T> implements GenericDAO<T> {
     }
 
     // Obtém o EntityManager a partir da classe de utilitário JPA.
-    public EntityManager getEm() {
-        return JPAUtil.getEntityManager();
-    }
+    public EntityManager getEm() { return JPAUtil.getEntityManager(); }
 
     // Métodos para controle de transação.
-    public void beginTransaction() {
-        JPAUtil.beginTransaction();
-    }
-
-    public void commit() {
-        JPAUtil.commit();
-    }
-
-    public void rollback() {
-        JPAUtil.rollback();
-    }
+    public void beginTransaction() { JPAUtil.beginTransaction(); }
+    public void commit() { JPAUtil.commit(); }
+    public void rollback() { JPAUtil.rollback(); }
 
     // Fecha o EntityManager.
-    public void close() {
-        JPAUtil.closeEntityManager();
-    }
+    public void close() { JPAUtil.closeEntityManager(); }
 }

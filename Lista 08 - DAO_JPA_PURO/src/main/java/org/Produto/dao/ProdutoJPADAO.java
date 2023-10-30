@@ -3,61 +3,66 @@ package org.Produto.dao;
 import java.time.LocalDate;
 import java.util.List;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import org.Produto.entity.Produto;
 
 public class ProdutoJPADAO extends GenericJPADAO<Produto> implements ProdutoDAO {
-
-    public ProdutoJPADAO() {
-        super(Produto.class); // Chama o construtor da classe pai e especifica a classe de entidade como Produto.
-    }
-
+    // Chama o construtor da classe pai e especifica a classe de entidade como Produto.
+    public ProdutoJPADAO() { super(Produto.class) ;}
+    // Remove um produto com base no código passado (não implementado corretamente).
     public void delete(int codigo) {
-        delete(new Produto()); // Remove um produto com base no código passado (não implementado corretamente).
+        EntityManager em = JPAUtil.getEntityManager();
+        em.getTransaction().begin();
+
+        // Consulta JPQL para excluir o produto com o código fornecido.
+        em.createQuery("delete from Produto p where p.codigo = :codigo")
+                .setParameter("codigo", codigo)
+                .executeUpdate();
+
+        em.getTransaction().commit();
     }
 
-    public Produto find(int id) {
-        return find(Integer.valueOf(id)); // Encontra um produto por ID.
-    }
-
+    // Encontra um produto por ID.
+    public Produto find(int id) { return find(Integer.valueOf(id)); }
     public Produto findByCodigo(int codigo) {
         EntityManager em = JPAUtil.getEntityManager();
-        String jpql = "select p from Produto p where p.codigo = :codigo"; // Consulta JPQL para encontrar um produto por código.
-        TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
-        query.setParameter("codigo", codigo); // Define o parâmetro "codigo" na consulta.
-        Produto produto = query.getSingleResult(); // Executa a consulta e obtém um único resultado (deve existir apenas um produto com o mesmo código).
+        // Consulta JPQL para encontrar um produto por código.
+        List<Produto> produtos = em
+                .createQuery("select p from Produto p where p.codigo = :codigo", Produto.class)
+                .setParameter("codigo", codigo)
+                .getResultList();
         JPAUtil.closeEntityManager();
-        return produto; // Retorna o produto encontrado.
+        return produtos.isEmpty() ? null : produtos.get(0);
     }
-
     public List<Produto> findByDescricao(String descricao) {
         EntityManager em = JPAUtil.getEntityManager();
-        String jpql = "select p from Produto p where upper(p.descricao) like upper(:descricao)"; // Consulta JPQL para encontrar produtos com base na descrição.
-        TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
-        query.setParameter("descricao", "%" + descricao + "%"); // Define o parâmetro "descricao" na consulta.
-        List<Produto> produtos = query.getResultList(); // Executa a consulta e obtém uma lista de produtos correspondentes.
+        // Consulta JPQL para encontrar produtos onde a descrição (ignorando maiúsculas/minúsculas) contém o texto especificado.
+        List<Produto> produtos = em
+                .createQuery("select p from Produto p where upper(p.descricao) like upper(:descricao)", Produto.class)
+                .setParameter("descricao", "%" + descricao + "%")
+                .getResultList();
+
         JPAUtil.closeEntityManager();
         return produtos; // Retorna a lista de produtos encontrados.
     }
-
     public List<Produto> findByPreco(double preco) {
         EntityManager em = JPAUtil.getEntityManager();
-        String jpql = "select p from Produto p where p.preco <= :preco"; // Consulta JPQL para encontrar produtos com preços menores ou iguais ao valor especificado.
-        TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
-        query.setParameter("preco", preco); // Define o parâmetro "preco" na consulta.
-        List<Produto> produtos = query.getResultList(); // Executa a consulta e obtém uma lista de produtos correspondentes.
+        // Consulta JPQL para encontrar produtos com preços menores ou iguais ao valor especificado.
+        List<Produto> produtos = em
+                .createQuery("select p from Produto p where p.preco <= :preco", Produto.class)
+                .setParameter("preco", preco)
+                .getResultList();
         JPAUtil.closeEntityManager();
-        return produtos; // Retorna a lista de produtos encontrados.
+        return produtos;
     }
-
     public List<Produto> findByDataUltimaEntrada(LocalDate dataInicial, LocalDate dataFinal) {
         EntityManager em = JPAUtil.getEntityManager();
-        String jpql = "select p from Produto p where p.ultima_entrada between :dataInicial and :dataFinal"; // Consulta JPQL para encontrar produtos com base na data de última entrada.
-        TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
-        query.setParameter("dataInicial", dataInicial); // Define o parâmetro "dataInicial" na consulta.
-        query.setParameter("dataFinal", dataFinal); // Define o parâmetro "dataFinal" na consulta.
-        List<Produto> produtos = query.getResultList(); // Executa a consulta e obtém uma lista de produtos correspondentes.
+        // Consulta JPQL para encontrar produtos com base na data de última entrada.
+        List<Produto> produtos = em
+                .createQuery("select p from Produto p where p.ultima_entrada between :dataInicial and :dataFinal", Produto.class)
+                .setParameter("dataInicial", dataInicial)
+                .setParameter("dataFinal", dataFinal)
+                .getResultList();
         JPAUtil.closeEntityManager();
-        return produtos; // Retorna a lista de produtos encontrados.
+        return produtos;
     }
 }
