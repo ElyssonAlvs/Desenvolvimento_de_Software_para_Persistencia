@@ -8,24 +8,22 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "compras")
+@Table(name = "vendas")
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Compra {
+public class Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
+    private Carro carro;
+
+    @OneToOne
     private Cliente cliente;
 
     @NonNull
     private LocalDate data;
-
-    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
-    private List<ItemCompra> itens;
-
-
 }
