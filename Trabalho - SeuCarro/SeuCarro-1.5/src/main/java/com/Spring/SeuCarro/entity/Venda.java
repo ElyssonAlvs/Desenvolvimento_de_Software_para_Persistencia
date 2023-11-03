@@ -1,10 +1,12 @@
 package com.Spring.SeuCarro.entity;
 
 import lombok.*;
-
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+
+@NamedQueries({
+        @NamedQuery(name = "vendaPorMarcaCarro", query = "SELECT v FROM Venda v WHERE v.carro.marca ilike %:marca% ")
+})
 
 @Entity
 @Data

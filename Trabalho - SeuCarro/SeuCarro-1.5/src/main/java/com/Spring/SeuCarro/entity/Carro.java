@@ -3,6 +3,10 @@ package com.Spring.SeuCarro.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+@NamedQueries({
+        @NamedQuery(name = "carroPorMarca", query = "SELECT c from Carro c WHERE c.marca ilike %:marca%")
+})
+
 @Entity
 @Data
 @Table(name = "carros")

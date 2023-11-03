@@ -5,9 +5,8 @@ import lombok.*;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")
+        @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike %:cpf%")
 })
-
 
 @Data
 @Entity
