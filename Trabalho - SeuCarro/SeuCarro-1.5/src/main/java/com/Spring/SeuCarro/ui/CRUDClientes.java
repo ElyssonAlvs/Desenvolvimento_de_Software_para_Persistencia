@@ -1,17 +1,23 @@
-package com.Spring.SeuCarro.ui.Cliente;
+package com.Spring.SeuCarro.ui;
 
 import com.Spring.SeuCarro.dao.ClienteDAO;
 import com.Spring.SeuCarro.entity.Cliente;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.util.List;
 
+@ComponentScan(basePackages = "com.Spring.SeuCarro")
 @Component
 @Slf4j
+@Configuration
+@Lazy
 public class CRUDClientes implements CommandLineRunner {
 
     @Autowired
@@ -118,7 +124,7 @@ public class CRUDClientes implements CommandLineRunner {
 
     private void obterCliente(Cliente cliente) {
         cliente.setNome(JOptionPane.showInputDialog("Nome", cliente.getNome()));
-        cliente.setSobrenome(JOptionPane.showInputDialog("Sobrenome", cliente.getSobrenome()));
+        cliente.setLastName(JOptionPane.showInputDialog("Sobrenome", cliente.getLastName()));
         cliente.setCpf(JOptionPane.showInputDialog("CPF", cliente.getCpf()));
         cliente.setFone(JOptionPane.showInputDialog("Fone", cliente.getFone()));
     }

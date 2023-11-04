@@ -22,5 +22,5 @@ public interface ClienteDAO extends JpaRepository<Cliente, Integer> {
     List<Cliente> findByNome(String nome);
 
     // Consulta utilizando Spring Data JPA
-    List<Cliente> findByLastnameIgnoreCase(String sobrenome);
+    List<Cliente> findByLastNameIgnoreCase(String sobrenome);
 }

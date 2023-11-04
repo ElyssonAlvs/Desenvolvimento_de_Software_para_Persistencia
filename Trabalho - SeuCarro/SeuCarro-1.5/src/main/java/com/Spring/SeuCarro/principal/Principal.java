@@ -1,73 +1,60 @@
 package com.Spring.SeuCarro.principal;
 
-import com.Spring.SeuCarro.ui.Carro.CRUDCarros;
-import com.Spring.SeuCarro.ui.Cliente.CRUDClientes;
-import com.Spring.SeuCarro.ui.Venda.CRUDVendas;
+import com.Spring.SeuCarro.ui.CRUDCarros;
+import com.Spring.SeuCarro.ui.CRUDClientes;
+import com.Spring.SeuCarro.ui.CRUDVendas;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import javax.swing.JOptionPane;
 
 @SpringBootApplication
+@EntityScan("com.Spring.SeuCarro.entity")
+@EnableJpaRepositories("com.Spring.SeuCarro.dao")
+@ComponentScan("com.Spring.SeuCarro.ui")
 public class Principal {
 
 	public static void main(String[] args) {
-		CRUDCarros crudCarros = new CRUDCarros();
-		CRUDClientes crudClientes = new CRUDClientes();
-		CRUDVendas crudVendas = new CRUDVendas();
+		ConfigurableApplicationContext context = new SpringApplicationBuilder(Principal.class).headless(false).run(args);
 
-		char opcao;
-		do {
-			opcao = exibirMenuPrincipal();
+		CRUDCarros crudCarros = context.getBean(CRUDCarros.class);
+		CRUDClientes crudClientes = context.getBean(CRUDClientes.class);
+		CRUDVendas crudVendas = context.getBean(CRUDVendas.class);
 
-			try {
-				switch (opcao) {
-					case '1':
-						crudCarros.run();
-						break;
-					case '2':
-						crudClientes.run();
-						break;
-					case '3':
-						crudVendas.run();
-						break;
-					case '4':
-						System.out.println("Saindo...");
-						break;
-					default:
-						System.out.println("Opção Inválida");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Erro: " + e.getMessage());
-			}
-
-		} while (opcao != '4');
-	}
-
-	private static char exibirMenuPrincipal() {
 		String menu = """
                 Escolha uma opção:
-                1 - Operações com Carros
-                2 - Operações com Clientes
-                3 - Operações com Vendas
+                1 - Carro
+                2 - Cliente
+                3 - Venda
                 4 - Sair""";
 
-		return exibirMenu(menu);
-	}
-
-	private static char exibirMenu(String menu) {
-		System.out.println(menu);
-
-		// Leitura da opção do usuário
-		try {
-			int opcao = Integer.parseInt(System.console().readLine());
-			if (opcao >= 1 && opcao <= 4) {
-				return (char) ('0' + opcao);
-			} else {
-				System.out.println("Opção Inválida");
-				return exibirMenu(menu);
+		String opcao;
+		do {
+			opcao = JOptionPane.showInputDialog(menu);
+			if (opcao == null) { // Usuário clicou em Cancelar ou fechou a janela
+				break;
 			}
-		} catch (NumberFormatException e) {
-			System.out.println("Opção Inválida");
-			return exibirMenu(menu);
-		}
+			switch (opcao) {
+				case "1":
+					crudCarros.run();
+					break;
+				case "2":
+					crudClientes.run();
+					break;
+				case "3":
+					crudVendas.run();
+					break;
+				case "4":
+					// Sair
+					break;
+				default:
+					JOptionPane.showMessageDialog(null, "Opção Inválida");
+					break;
+			}
+		} while (!"4".equals(opcao)); // Continua até o usuário escolher "4 - Sair"
 	}
 }

@@ -1,4 +1,4 @@
-package com.Spring.SeuCarro.ui.Venda;
+package com.Spring.SeuCarro.ui;
 
 import com.Spring.SeuCarro.dao.ClienteDAO;
 import com.Spring.SeuCarro.dao.VendaDAO;
@@ -8,14 +8,20 @@ import com.Spring.SeuCarro.entity.Venda;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@ComponentScan(basePackages = "com.Spring.SeuCarro")
 @Component
 @Slf4j
+@Configuration
+@Lazy
 public class CRUDVendas implements CommandLineRunner {
 
     @Autowired

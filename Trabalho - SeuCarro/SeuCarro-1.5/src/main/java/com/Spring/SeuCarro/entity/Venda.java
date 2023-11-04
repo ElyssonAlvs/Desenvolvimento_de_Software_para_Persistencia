@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @NamedQueries({
-        @NamedQuery(name = "vendaPorMarcaCarro", query = "SELECT v FROM Venda v WHERE v.carro.marca ilike %:marca% ")
+        @NamedQuery(name = "vendaPorMarcaCarro", query = "SELECT v FROM Venda v WHERE v.carro.marca ilike :marca")
 })
 
 @Entity
@@ -21,10 +21,12 @@ public class Venda {
     private int id;
 
     @ManyToOne
-    private Carro carro;
-
-    @OneToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "carro_id")
+    private Carro carro;
 
     @NonNull
     private LocalDate data;

@@ -1,17 +1,23 @@
-package com.Spring.SeuCarro.ui.Carro;
+package com.Spring.SeuCarro.ui;
 
 import com.Spring.SeuCarro.dao.CarroDAO;
 import com.Spring.SeuCarro.entity.Carro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.util.List;
 
-@Component
+@ComponentScan(basePackages = "com.Spring.SeuCarro")
 @Slf4j
+@Configuration
+@Component
+@Lazy
 public class CRUDCarros implements CommandLineRunner {
 
     @Autowired

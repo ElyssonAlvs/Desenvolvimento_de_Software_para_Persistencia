@@ -15,7 +15,7 @@ public interface VendaDAO extends JpaRepository<Venda, Integer> {
     @Query(name = "vendaPorMarcaCarro")
     List<Venda> findByCarroMarca(String marca);
 
-    // JPQL - todas as vendas dentro de um intervalo de datas especificado
+    // JPQL - todas as vendas em um intervalo de datas especificado
     @Query("SELECT v FROM Venda v WHERE v.data BETWEEN :dataInicio AND :dataFim")
     List<Venda> findVendasEntreDatas(LocalDate dataInicio, LocalDate dataFim);
 

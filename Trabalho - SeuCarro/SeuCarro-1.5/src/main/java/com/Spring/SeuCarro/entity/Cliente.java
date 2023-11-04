@@ -5,22 +5,22 @@ import lombok.*;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike %:cpf%")
+        @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike :cpf")
 })
 
 @Data
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
-    private String sobrenome;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(unique = true, nullable = false)
     private String cpf;
@@ -29,6 +29,9 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private List<Carro> carro_comprado;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Venda> vendas;
 
     @Override
     public String toString() {
