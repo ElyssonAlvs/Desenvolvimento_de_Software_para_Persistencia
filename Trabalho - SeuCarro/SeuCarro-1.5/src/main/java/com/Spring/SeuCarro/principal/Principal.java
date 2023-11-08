@@ -3,10 +3,12 @@ package com.Spring.SeuCarro.principal;
 import com.Spring.SeuCarro.ui.CRUDCarros;
 import com.Spring.SeuCarro.ui.CRUDClientes;
 import com.Spring.SeuCarro.ui.CRUDVendas;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import javax.swing.JOptionPane;
@@ -29,15 +31,15 @@ public class Principal implements CommandLineRunner {
 
 
 	public static void main(String[] args) {
-		SpringApplicationBuilder builder = new SpringApplicationBuilder(MenuPrincipal.class);
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(Principal.class);
 		builder.headless(false).run(args);
 	}
 
-	public static void run(String... args) throws Exception {
+	public void run(String... args) throws Exception {
 		StringBuilder menu = new StringBuilder( """
-                Escolha uma opção:
-                1 - Carro
-                2 - Cliente
+                Menu Principal :
+                1 - Cliente
+                2 - Carro
                 3 - Venda
                 4 - Sair""");
 
@@ -47,13 +49,13 @@ public class Principal implements CommandLineRunner {
 				opcao = JOptionPane.showInputDialog(menu).charAt(0);
 				switch (opcao) {
 					case '1':     // Clientes
-						CRUDClientes.menu();
+						crudClientes.menu();
 						break;
 					case '2':     // Carros
-						CRUDCarros.menu();
+						crudCarros.menu();
 						break;
-					case '3':     // Compras
-						CRUDVendas.menu();
+					case '3':     // Vendas
+						crudVendas.menu();
 						break;
 					case '4':     // Sair
 						break;

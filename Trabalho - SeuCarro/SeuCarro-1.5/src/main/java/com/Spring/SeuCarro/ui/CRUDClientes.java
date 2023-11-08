@@ -4,155 +4,122 @@ import com.Spring.SeuCarro.dao.ClienteDAO;
 import com.Spring.SeuCarro.entity.Cliente;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.util.List;
 
-@ComponentScan(basePackages = "com.Spring.SeuCarro")
-@Component
 @Slf4j
-@Configuration
-public class CRUDClientes implements CommandLineRunner {
-
+@Component
+public class CRUDClientes {
     @Autowired
     private ClienteDAO clienteDAO;
 
-    public void run(String... args) {
-        MenuClientes menu = new MenuClientes();
+    public void obterCliente(Cliente cl) {
+        String nome = JOptionPane.showInputDialog("Nome", cl.getNome());
+        String lastName = JOptionPane.showInputDialog("Last Name", cl.getLastName());
+        String cpf = JOptionPane.showInputDialog("CPF", cl.getCpf());
+        String fone = JOptionPane.showInputDialog("Fone", cl.getFone());
 
-        char opcao;
+        cl.setNome(nome);
+        cl.setLastName(lastName);
+        cl.setCpf(cpf);
+        cl.setFone(fone);
+    }
+
+    public void listaClientes(List<Cliente> clientes) {
+        StringBuilder listagem = new StringBuilder();
+        for (Cliente cl : clientes) {
+            listagem.append(cl.toString()).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, listagem.isEmpty() ? "Nenhum cliente encontrado" : listagem);
+    }
+
+    public void listaCliente(Cliente cl) {
+        JOptionPane.showMessageDialog(null, cl == null ? "Nenhum cliente encontrado" : cl.toString());
+    }
+
+    public void menu() {
+        StringBuilder menu = new StringBuilder("Menu Clientes\n")
+                .append("1 - Inserir\n")
+                .append("2 - Atualizar por CPF\n")
+                .append("3 - Remover por CPF\n")
+                .append("4 - Exibir por CPF\n")
+                .append("5 - Exibir por id\n")
+                .append("6 - Exibir todos\n")
+                .append("7 - Exibir todos que contém determinado nome\n")
+                .append("8 - Encontrar clientes com telefone\n")
+                .append("9 - Encontrar clientes por nome (Consulta Nativa)\n")
+                .append("0 - Voltar ao menu anterior\n");
+
+        String opcao = "0";
         do {
-            opcao = menu.exibirMenu();
-
             try {
+                Cliente cl;
+                String cpf;
+                opcao = String.valueOf(JOptionPane.showInputDialog(menu).charAt(0));
                 switch (opcao) {
-                    case '1':
-                        inserirCliente();
+                    case "1": // Inserir
+                        cl = new Cliente();
+                        obterCliente(cl);
+                        clienteDAO.save(cl);
                         break;
-                    case '2':
-                        atualizarClientePorCPF();
+                    case "2": // Atualizar por CPF
+                        cpf = JOptionPane.showInputDialog("Digite o CPF do cliente a ser alterado");
+                        cl = clienteDAO.buscaPorCpf(cpf);
+                        if (cl != null) {
+                            obterCliente(cl);
+                            clienteDAO.save(cl);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Não foi possível atualizar, pois o cliente não foi encontrado.");
+                        }
                         break;
-                    case '3':
-                        removerClientePorCPF();
+                    case "3": // Remover por CPF
+                        cpf = JOptionPane.showInputDialog("CPF");
+                        cl = clienteDAO.buscaPorCpf(cpf);
+                        if (cl != null) {
+                            clienteDAO.delete(cl);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Não foi possível remover, pois o cliente não foi encontrado.");
+                        }
                         break;
-                    case '4':
-                        exibirClientePorCPF();
+                    case "4": // Exibir por CPF
+                        cpf = JOptionPane.showInputDialog("CPF");
+                        cl = clienteDAO.buscaPorCpf(cpf);
+                        listaCliente(cl);
                         break;
-                    case '5':
-                        exibirClientePorId();
+                    case "5": // Exibir por id
+                        int id = Integer.parseInt(JOptionPane.showInputDialog("Id"));
+                        cl = clienteDAO.findById(id).orElse(null);
+                        listaCliente(cl);
                         break;
-                    case '6':
-                        exibirTodosClientes();
+                    case "6": // Exibir todos
+                        listaClientes(clienteDAO.findAll());
                         break;
-                    case '7':
-                        exibirClientesPorNome();
+                    case "7": // Exibir todos que contém determinado nome
+                        String nome = JOptionPane.showInputDialog("Nome");
+                        listaClientes(clienteDAO.findByLastNameIgnoreCase(nome));
                         break;
-                    case '8':
-                        JOptionPane.showMessageDialog(null, "Saindo...");
+                    case "8": // Encontrar clientes com telefone
+                        List<Cliente> clientesComTelefone = clienteDAO.findClientesComTelefone();
+                        listaClientes(clientesComTelefone);
+                        break;
+                    case "9": // Encontrar clientes por nome (Consulta Nativa)
+                        String nomeConsultaNativa = JOptionPane.showInputDialog("Nome");
+                        List<Cliente> clientesPorNomeNativa = clienteDAO.findByNome(nomeConsultaNativa);
+                        listaClientes(clientesPorNomeNativa);
+                        break;
+                    case "0": // Voltar ao menu anterior
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção Inválida");
+                        break;
                 }
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
                 JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
             }
 
-        } while (opcao != '8');
+        } while (!opcao.equals("0")); // Verifica se a opção é "0" para voltar ao menu anterior
     }
 
-    private void inserirCliente() {
-        Cliente cliente = new Cliente();
-        obterCliente(cliente);
-        clienteDAO.save(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso.");
-    }
-
-    private void atualizarClientePorCPF() {
-        String cpf = JOptionPane.showInputDialog("Digite o CPF do cliente a ser alterado");
-        Cliente cliente = clienteDAO.buscaPorCpf(cpf);
-
-        if (cliente != null) {
-            obterCliente(cliente);
-            clienteDAO.save(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
-        }
-    }
-
-    private void removerClientePorCPF() {
-        String cpf = JOptionPane.showInputDialog("Digite o CPF do cliente a ser removido");
-        Cliente cliente = clienteDAO.buscaPorCpf(cpf);
-
-        if (cliente != null) {
-            clienteDAO.delete(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente removido com sucesso.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
-        }
-    }
-
-    private void exibirClientePorCPF() {
-        String cpf = JOptionPane.showInputDialog("Digite o CPF do cliente");
-        Cliente cliente = clienteDAO.buscaPorCpf(cpf);
-        listaCliente(cliente);
-    }
-
-    private void exibirClientePorId() {
-        int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do cliente"));
-        Cliente cliente = clienteDAO.findById(id).orElse(null);
-        listaCliente(cliente);
-    }
-
-    private void exibirTodosClientes() {
-        List<Cliente> clientes = clienteDAO.findAll();
-        listaClientes(clientes);
-    }
-
-    private void exibirClientesPorNome() {
-        String nome = JOptionPane.showInputDialog("Digite o nome do cliente");
-        List<Cliente> clientes = clienteDAO.findByNome(nome);
-        listaClientes(clientes);
-    }
-
-    private void obterCliente(Cliente cliente) {
-        cliente.setNome(JOptionPane.showInputDialog("Nome", cliente.getNome()));
-        cliente.setLastName(JOptionPane.showInputDialog("Sobrenome", cliente.getLastName()));
-        cliente.setCpf(JOptionPane.showInputDialog("CPF", cliente.getCpf()));
-        cliente.setFone(JOptionPane.showInputDialog("Fone", cliente.getFone()));
-    }
-
-    private void listaClientes(List<Cliente> clientes) {
-        StringBuilder listagem = new StringBuilder("Clientes:\n");
-        for (Cliente cliente : clientes) {
-            listagem.append(cliente).append("\n");
-        }
-        JOptionPane.showMessageDialog(null, listagem.toString());
-    }
-
-    private void listaCliente(Cliente cliente) {
-        JOptionPane.showMessageDialog(null, cliente != null ? cliente.toString() : "Cliente não encontrado");
-    }
-
-    private static class MenuClientes {
-        public char exibirMenu() {
-            String menu = """
-                    Escolha uma opção:
-                    1 - Inserir Cliente
-                    2 - Atualizar Cliente por CPF
-                    3 - Remover Cliente por CPF
-                    4 - Exibir Cliente por CPF
-                    5 - Exibir Cliente por ID
-                    6 - Exibir Todos os Clientes
-                    7 - Exibir Clientes por Nome
-                    8 - Sair""";
-
-            return JOptionPane.showInputDialog(menu).charAt(0);
-        }
-    }
 }

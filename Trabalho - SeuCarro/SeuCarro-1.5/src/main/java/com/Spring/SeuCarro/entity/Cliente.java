@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
 
-@NamedQueries({
-        @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike :cpf")
-})
+
+@NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike :cpf")
 
 @Data
 @Entity
@@ -16,7 +15,7 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String nome;
     @Column(name = "last_name")

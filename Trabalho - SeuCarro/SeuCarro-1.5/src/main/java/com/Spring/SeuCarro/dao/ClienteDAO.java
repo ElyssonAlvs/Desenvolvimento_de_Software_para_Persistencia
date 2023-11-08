@@ -18,9 +18,11 @@ public interface ClienteDAO extends JpaRepository<Cliente, Integer> {
     List<Cliente> findClientesComTelefone();
 
     // Consulta Native Query para encontrar clientes por nome
-    @Query(value = "SELECT * FROM Cliente as c WHERE nome = :nome", nativeQuery = true)
+    @Query(value = "SELECT * FROM Cliente WHERE nome = :nome", nativeQuery = true)
     List<Cliente> findByNome(String nome);
 
     // Consulta utilizando Spring Data JPA
-    List<Cliente> findByLastNameIgnoreCase(String sobrenome);
+    Optional<Cliente> findById(int id);
+
+    List<Cliente> findByLastNameIgnoreCase(String nome);
 }

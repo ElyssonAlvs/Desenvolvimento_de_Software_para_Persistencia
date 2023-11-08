@@ -4,9 +4,8 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
-@NamedQueries({
-        @NamedQuery(name = "vendaPorMarcaCarro", query = "SELECT v FROM Venda v WHERE v.carro.marca ilike :marca")
-})
+
+@NamedQuery(name = "vendaPorMarcaCarro", query = "SELECT v FROM Venda v WHERE v.carro.marca ilike :marca")
 
 @Entity
 @Data
