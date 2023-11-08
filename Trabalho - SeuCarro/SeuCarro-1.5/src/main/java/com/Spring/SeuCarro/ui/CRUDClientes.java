@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.stereotype.Component;
 import javax.swing.*;
@@ -17,7 +16,6 @@ import java.util.List;
 @Component
 @Slf4j
 @Configuration
-@Lazy
 public class CRUDClientes implements CommandLineRunner {
 
     @Autowired

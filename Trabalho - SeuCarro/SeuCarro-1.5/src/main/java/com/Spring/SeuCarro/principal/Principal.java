@@ -9,52 +9,63 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import javax.swing.JOptionPane;
 
 @SpringBootApplication
 @EntityScan("com.Spring.SeuCarro.entity")
 @EnableJpaRepositories("com.Spring.SeuCarro.dao")
 @ComponentScan("com.Spring.SeuCarro.ui")
-public class Principal {
+@Slf4j
+public class Principal implements CommandLineRunner {
+
+	@Autowired
+	private CRUDCarros crudCarros;
+
+	@Autowired
+	private CRUDClientes crudClientes;
+
+	@Autowired
+	private CRUDVendas crudVendas;
+
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = new SpringApplicationBuilder(Principal.class).headless(false).run(args);
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(MenuPrincipal.class);
+		builder.headless(false).run(args);
+	}
 
-		CRUDCarros crudCarros = context.getBean(CRUDCarros.class);
-		CRUDClientes crudClientes = context.getBean(CRUDClientes.class);
-		CRUDVendas crudVendas = context.getBean(CRUDVendas.class);
-
-		String menu = """
+	public static void run(String... args) throws Exception {
+		StringBuilder menu = new StringBuilder( """
                 Escolha uma opção:
                 1 - Carro
                 2 - Cliente
                 3 - Venda
-                4 - Sair""";
+                4 - Sair""");
 
-		String opcao;
+		char opcao = '0';
 		do {
-			opcao = JOptionPane.showInputDialog(menu);
-			if (opcao == null) { // Usuário clicou em Cancelar ou fechou a janela
-				break;
+			try {
+				opcao = JOptionPane.showInputDialog(menu).charAt(0);
+				switch (opcao) {
+					case '1':     // Clientes
+						CRUDClientes.menu();
+						break;
+					case '2':     // Carros
+						CRUDCarros.menu();
+						break;
+					case '3':     // Compras
+						CRUDVendas.menu();
+						break;
+					case '4':     // Sair
+						break;
+					default:
+						JOptionPane.showMessageDialog(null, "Opção Inválida");
+						break;
+					}
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
 			}
-			switch (opcao) {
-				case "1":
-					crudCarros.run();
-					break;
-				case "2":
-					crudClientes.run();
-					break;
-				case "3":
-					crudVendas.run();
-					break;
-				case "4":
-					// Sair
-					break;
-				default:
-					JOptionPane.showMessageDialog(null, "Opção Inválida");
-					break;
-			}
-		} while (!"4".equals(opcao)); // Continua até o usuário escolher "4 - Sair"
+
+		} while(opcao != '4');
 	}
 }
