@@ -2,6 +2,8 @@ package com.Spring.SeuCarro.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.util.List;
 
 
@@ -17,23 +19,24 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
     private String nome;
-    @Column(name = "last_name")
+
+    @Column(name = "ultimo_nome")
     private String lastName;
 
     @Column(unique = true, nullable = false)
     private String cpf;
 
+    @NotNull
+    @Column(nullable = false)
     private String fone;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Carro> carro_comprado;
-
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venda> vendas;
 
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", fone=" + fone + "]";
+        return "Cliente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", ultimo_nome=" + lastName + ", fone=" + fone + "]";
     }
 }

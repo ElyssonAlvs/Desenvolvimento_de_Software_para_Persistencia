@@ -11,13 +11,11 @@ import lombok.*;
 @Table(name = "carros")
 @NoArgsConstructor
 @AllArgsConstructor
-// @RequiredArgsConstructor
 public class Carro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
     @Column(nullable = false)
     private String marca;
@@ -28,8 +26,9 @@ public class Carro {
     @Column(nullable = false)
     private String configuracao;
 
+    @NonNull
     @Column(nullable = false)
-    private Integer ano_fabricacao;
+    private Integer anoFabricacao;
 
     @Column(nullable = false)
     private String tipo_combustivel;
@@ -39,9 +38,5 @@ public class Carro {
 
     @Column(nullable = false)
     private Double preco;
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
 
 }

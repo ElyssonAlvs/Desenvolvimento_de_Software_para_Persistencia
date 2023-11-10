@@ -5,7 +5,6 @@ import com.Spring.SeuCarro.entity.Carro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class CRUDCarros {
         carro.setMarca(JOptionPane.showInputDialog("Marca", carro.getMarca()));
         carro.setModelo(JOptionPane.showInputDialog("Modelo", carro.getModelo()));
         carro.setConfiguracao(JOptionPane.showInputDialog("Configuração", carro.getConfiguracao()));
-        carro.setAno_fabricacao(Integer.parseInt(JOptionPane.showInputDialog("Ano de Fabricação", String.valueOf(carro.getAno_fabricacao()))));
+        carro.setAnoFabricacao(Integer.parseInt(JOptionPane.showInputDialog("Ano de Fabricação", String.valueOf(carro.getAnoFabricacao()))));
         carro.setTipo_combustivel(JOptionPane.showInputDialog("Tipo de Combustível", carro.getTipo_combustivel()));
         carro.setCor(JOptionPane.showInputDialog("Cor", carro.getCor()));
         carro.setPreco(Double.parseDouble(JOptionPane.showInputDialog("Preço", String.valueOf(carro.getPreco()))));
@@ -41,7 +40,7 @@ public class CRUDCarros {
     public void menu() {
         StringBuilder menu = new StringBuilder("Menu Carros\n")
                 .append("1 - Inserir carro\n")
-                .append("2 - Atualizar por marca\n")
+                .append("2 - Atualizar por id\n")
                 .append("3 - Remover por id\n")
                 .append("4 - Exibir por id\n")
                 .append("5 - Exibir todos\n")
@@ -64,16 +63,14 @@ public class CRUDCarros {
                         carroDAO.save(carro);
                         break;
                     case '2':
-                        String marca = JOptionPane.showInputDialog("Digite a marca do carro a ser alterado");
-                        List<Carro> carros = carroDAO.findByMarca(marca);
-                        if (!carros.isEmpty()) {
-                            carro = escolherCarroDaLista(carros);
-                            if (carro != null) {
-                                obterCarro(carro);
-                                carroDAO.save(carro);
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Nenhum carro encontrado com a marca especificada.");
-                            }
+                        id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do carro a ser atualizado"));
+                        carro = carroDAO.findById(id).orElse(null);
+                        if (carro != null) {
+                            obterCarro(carro); // Permita ao usuário atualizar os detalhes do carro
+                            carroDAO.save(carro);
+                            JOptionPane.showMessageDialog(null, "Carro atualizado com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Carro não encontrado.");
                         }
                         break;
                     case '3':
@@ -123,25 +120,4 @@ public class CRUDCarros {
             }
         } while (opcao != '9');
     }
-
-    private Carro escolherCarroDaLista(List<Carro> carros) {
-        String[] options = carros.stream().map(carro -> carro.getId() + " - " + carro.getMarca() + " " + carro.getModelo()).toArray(String[]::new);
-        int choice = JOptionPane.showOptionDialog(
-                null,
-                "Escolha o carro a ser atualizado:",
-                "Selecionar Carro",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                options,
-                options[0]
-        );
-
-        if (choice != -1) {
-            // O usuário escolheu um carro da lista
-            return carros.get(choice);
-        }
-        return null; // Nenhum carro selecionado
-    }
-
 }

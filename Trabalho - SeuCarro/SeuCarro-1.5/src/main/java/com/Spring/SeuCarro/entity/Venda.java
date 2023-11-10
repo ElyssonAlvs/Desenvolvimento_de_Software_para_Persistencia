@@ -20,11 +20,9 @@ public class Venda {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "carro_id")
     private Carro carro;
 
     @NonNull

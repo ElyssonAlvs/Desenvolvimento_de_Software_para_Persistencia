@@ -3,6 +3,7 @@ package com.Spring.SeuCarro.dao;
 import com.Spring.SeuCarro.entity.Venda;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -25,4 +26,8 @@ public interface VendaDAO extends JpaRepository<Venda, Integer> {
 
     // Consulta Spring Data JPA
     List<Venda> findByCarroModelo(String modelo);
+
+    @Query("SELECT v FROM Venda v WHERE v.carro.marca LIKE %:marca%")
+    List<Venda> findVendasPorMarcaCarro(@Param("marca") String marca);
+
 }

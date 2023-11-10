@@ -14,16 +14,11 @@ public class CRUDClientes {
     @Autowired
     private ClienteDAO clienteDAO;
 
-    public void obterCliente(Cliente cl) {
-        String nome = JOptionPane.showInputDialog("Nome", cl.getNome());
-        String lastName = JOptionPane.showInputDialog("Last Name", cl.getLastName());
-        String cpf = JOptionPane.showInputDialog("CPF", cl.getCpf());
-        String fone = JOptionPane.showInputDialog("Fone", cl.getFone());
-
-        cl.setNome(nome);
-        cl.setLastName(lastName);
-        cl.setCpf(cpf);
-        cl.setFone(fone);
+    public void obterCliente(Cliente cliente) {
+        cliente.setNome(JOptionPane.showInputDialog("Nome", cliente.getNome()));
+        cliente.setLastName(JOptionPane.showInputDialog("Last Name", cliente.getLastName()));
+        cliente.setCpf(JOptionPane.showInputDialog("CPF", cliente.getCpf()));
+        cliente.setFone(JOptionPane.showInputDialog("Fone", cliente.getFone()));
     }
 
     public void listaClientes(List<Cliente> clientes) {
@@ -46,10 +41,8 @@ public class CRUDClientes {
                 .append("4 - Exibir por CPF\n")
                 .append("5 - Exibir por id\n")
                 .append("6 - Exibir todos\n")
-                .append("7 - Exibir todos que contém determinado nome\n")
-                .append("8 - Encontrar clientes com telefone\n")
-                .append("9 - Encontrar clientes por nome (Consulta Nativa)\n")
-                .append("0 - Voltar ao menu anterior\n");
+                .append("7 - Encontrar clientes por nome\n")
+                .append("8 - Voltar ao menu anterior\n");
 
         String opcao = "0";
         do {
@@ -67,8 +60,15 @@ public class CRUDClientes {
                         cpf = JOptionPane.showInputDialog("Digite o CPF do cliente a ser alterado");
                         cl = clienteDAO.buscaPorCpf(cpf);
                         if (cl != null) {
-                            obterCliente(cl);
-                            clienteDAO.save(cl);
+                            // Verificar a opção de cancelamento
+                            int escolha = JOptionPane.showConfirmDialog(null, "Deseja atualizar o cliente com CPF: " + cpf + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
+                            if (escolha == JOptionPane.YES_OPTION) {
+                                obterCliente(cl); // Permita ao usuário atualizar os detalhes do cliente
+                                clienteDAO.save(cl);
+                                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso.");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Operação de atualização cancelada.");
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "Não foi possível atualizar, pois o cliente não foi encontrado.");
                         }
@@ -95,20 +95,12 @@ public class CRUDClientes {
                     case "6": // Exibir todos
                         listaClientes(clienteDAO.findAll());
                         break;
-                    case "7": // Exibir todos que contém determinado nome
-                        String nome = JOptionPane.showInputDialog("Nome");
-                        listaClientes(clienteDAO.findByLastNameIgnoreCase(nome));
-                        break;
-                    case "8": // Encontrar clientes com telefone
-                        List<Cliente> clientesComTelefone = clienteDAO.findClientesComTelefone();
-                        listaClientes(clientesComTelefone);
-                        break;
-                    case "9": // Encontrar clientes por nome (Consulta Nativa)
+                    case "7": // Encontrar clientes por nome (Consulta Nativa)
                         String nomeConsultaNativa = JOptionPane.showInputDialog("Nome");
                         List<Cliente> clientesPorNomeNativa = clienteDAO.findByNome(nomeConsultaNativa);
                         listaClientes(clientesPorNomeNativa);
                         break;
-                    case "0": // Voltar ao menu anterior
+                    case "8": // Voltar ao menu anterior
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção Inválida");
@@ -118,8 +110,7 @@ public class CRUDClientes {
                 log.error(e.getMessage(), e);
                 JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
             }
-
-        } while (!opcao.equals("0")); // Verifica se a opção é "0" para voltar ao menu anterior
+        } while (!opcao.equals("8"));
     }
 
 }
