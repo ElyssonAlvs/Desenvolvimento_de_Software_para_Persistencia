@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
 
-
 @NamedQuery(name = "clientePorCpf", query = "SELECT c FROM Cliente c WHERE c.cpf ilike :cpf")
 
 @Data
@@ -15,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,6 +35,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venda> vendas;
 
+    // Sobrescrita do método toString para exibição personalizada
     @Override
     public String toString() {
         return "Cliente [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", ultimo_nome=" + lastName + ", fone=" + fone + "]";

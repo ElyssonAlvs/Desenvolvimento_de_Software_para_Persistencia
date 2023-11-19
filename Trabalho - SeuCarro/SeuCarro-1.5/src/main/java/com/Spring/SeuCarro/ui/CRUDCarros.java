@@ -5,6 +5,7 @@ import com.Spring.SeuCarro.entity.Carro;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import javax.swing.*;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class CRUDCarros {
     @Autowired
     private CarroDAO carroDAO;
 
+    // Obtém informações de um carro a partir do usuário
     public void obterCarro(Carro carro) {
         carro.setMarca(JOptionPane.showInputDialog("Marca", carro.getMarca()));
         carro.setModelo(JOptionPane.showInputDialog("Modelo", carro.getModelo()));
@@ -25,6 +27,7 @@ public class CRUDCarros {
         carro.setPreco(Double.parseDouble(JOptionPane.showInputDialog("Preço", String.valueOf(carro.getPreco()))));
     }
 
+    // Exibe a lista de carros
     public void listaCarros(List<Carro> carros) {
         StringBuilder listagem = new StringBuilder();
         for (Carro carro : carros) {
@@ -33,10 +36,12 @@ public class CRUDCarros {
         JOptionPane.showMessageDialog(null, listagem.toString().isEmpty() ? "Nenhum carro encontrado" : listagem.toString());
     }
 
+    // Exibe as informações de um carro
     public void listaCarro(Carro carro) {
         JOptionPane.showMessageDialog(null, carro == null ? "Nenhum carro encontrado" : carro);
     }
 
+    // Exibe o menu para interação com carros
     public void menu() {
         StringBuilder menu = new StringBuilder("Menu Carros\n")
                 .append("1 - Inserir carro\n")
@@ -58,11 +63,13 @@ public class CRUDCarros {
                 opcao = JOptionPane.showInputDialog(menu).charAt(0);
                 switch (opcao) {
                     case '1':
+                        // Inserir carro
                         carro = new Carro();
                         obterCarro(carro);
                         carroDAO.save(carro);
                         break;
                     case '2':
+                        // Atualizar por id
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do carro a ser atualizado"));
                         carro = carroDAO.findById(id).orElse(null);
                         if (carro != null) {
@@ -74,6 +81,7 @@ public class CRUDCarros {
                         }
                         break;
                     case '3':
+                        // Remover por id
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do carro a ser removido"));
                         carro = carroDAO.findById(id).orElse(null);
                         if (carro != null) {
@@ -83,6 +91,7 @@ public class CRUDCarros {
                         }
                         break;
                     case '4':
+                        // Exibir por id
                         id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do carro a ser exibido"));
                         carro = carroDAO.findById(id).orElse(null);
                         if (carro != null) {
@@ -92,23 +101,27 @@ public class CRUDCarros {
                         }
                         break;
                     case '5':
+                        // Exibir todos
                         listaCarros(carroDAO.findAll());
                         break;
                     case '6':
+                        // Exibir carros por ano de fabricação
                         int ano = Integer.parseInt(JOptionPane.showInputDialog("Digite o ano de fabricação"));
                         listaCarros(carroDAO.findByAnoFabricacao(ano));
                         break;
                     case '7':
+                        // Exibir carros por preço máximo
                         double maxPreco = Double.parseDouble(JOptionPane.showInputDialog("Digite o preço máximo"));
                         listaCarros(carroDAO.findCarrosComPrecoMenorQue(maxPreco));
                         break;
                     case '8':
+                        // Exibir carros por ano de fabricação entre
                         int anoInicial = Integer.parseInt(JOptionPane.showInputDialog("Digite o ano de fabricação inicial"));
                         int anoFinal = Integer.parseInt(JOptionPane.showInputDialog("Digite o ano de fabricação final"));
                         listaCarros(carroDAO.findByAnoFabricacaoBetween(anoInicial, anoFinal));
                         break;
                     case '9':
-                        // Sair
+                        // Menu anterior
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção Inválida");

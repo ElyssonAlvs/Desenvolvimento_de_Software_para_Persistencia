@@ -5,17 +5,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClienteDAO extends JpaRepository<Cliente, Integer> {
 
-    // A consulta nomeada "clientePorCpf" está definida na classe Cliente
+    // Consulta nomeada "clientePorCpf" definida na classe Cliente
     @Query(name = "clientePorCpf")
     Cliente buscaPorCpf(@Param("cpf") String cpf);
 
     // Consulta Native Query para encontrar clientes por nome
-    @Query(value = "SELECT * FROM Cliente WHERE nome = :nome", nativeQuery = true)
+    @Query(value = "SELECT * FROM Clientes WHERE nome = :nome", nativeQuery = true)
     List<Cliente> findByNome(String nome);
 
     // Consulta utilizando Spring Data JPA

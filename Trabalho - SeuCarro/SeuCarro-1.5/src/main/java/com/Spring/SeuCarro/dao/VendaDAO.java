@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VendaDAO extends JpaRepository<Venda, Integer> {
@@ -20,14 +21,9 @@ public interface VendaDAO extends JpaRepository<Venda, Integer> {
     @Query("SELECT v FROM Venda v WHERE v.data BETWEEN :dataInicio AND :dataFim")
     List<Venda> findVendasEntreDatas(LocalDate dataInicio, LocalDate dataFim);
 
-    // Native Query - todas as vendas relacionadas a carros com preço acima de um valor específico
-    @Query(value = "SELECT * FROM vendas v JOIN carros c ON v.carro_id = c.id WHERE c.preco > :preco", nativeQuery = true)
-    List<Venda> findVendasComPrecoMaiorQue(Double preco);
-
     // Consulta Spring Data JPA
     List<Venda> findByCarroModelo(String modelo);
 
-    @Query("SELECT v FROM Venda v WHERE v.carro.marca LIKE %:marca%")
-    List<Venda> findVendasPorMarcaCarro(@Param("marca") String marca);
-
+    @Override
+    Optional<Venda> findById(Integer id);
 }

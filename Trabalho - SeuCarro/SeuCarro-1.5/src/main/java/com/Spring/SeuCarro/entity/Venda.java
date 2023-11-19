@@ -27,4 +27,5 @@ public class Venda {
 
     @NonNull
     private LocalDate data;
+
 }

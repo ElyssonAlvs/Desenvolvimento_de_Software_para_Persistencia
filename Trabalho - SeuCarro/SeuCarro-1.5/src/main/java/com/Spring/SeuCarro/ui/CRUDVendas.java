@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -32,7 +31,7 @@ public class CRUDVendas {
         for (Venda venda : vendas) {
             listaVendas.append("ID: ").append(venda.getId())
                     .append(", Cliente: ").append(venda.getCliente().getNome())
-                    .append(", Carro: ").append(venda.getCarro().getMarca())
+                    .append(", Carro: marca- ").append(venda.getCarro().getMarca()).append(", modelo- ").append(venda.getCarro().getModelo())
                     .append(", Data: ").append(venda.getData()).append("\n");
         }
         JOptionPane.showMessageDialog(null, listaVendas.toString());
@@ -47,16 +46,20 @@ public class CRUDVendas {
     }
 
     public void menu() {
+        // Método que representa o menu principal para interação com o usuário
+        // Exibe opções como exibir vendas por marca, entre datas, criar, atualizar, remover, etc.
+        // Usa um loop para manter o usuário interagindo até a opção '8' ser escolhida.
+
         StringBuilder menu = new StringBuilder("Menu Vendas\n")
                 .append("1 - Exibir Vendas por Marca de Carro\n")
                 .append("2 - Exibir Vendas entre Datas\n")
-                .append("3 - Exibir Vendas com Preço Maior que\n")
-                .append("4 - Exibir Vendas por Modelo de Carro\n")
-                .append("5 - Criar Venda\n")
-                .append("6 - Atualizar Venda\n")
-                .append("7 - Remover Venda\n")
-                .append("8 - Exibir Todas as Vendas\n")
-                .append("9 - Menu anterior");
+                .append("3 - Exibir Vendas por Modelo de Carro\n")
+                .append("4 - Criar Venda\n")
+                .append("5 - Atualizar Venda\n")
+                .append("6 - Remover Venda\n")
+                .append("7 - Exibir Todas as Vendas\n")
+                .append("8 - Exibir por ID\n")
+                .append("0 - Menu anterior");
         char opcao = '0';
         do {
             try {
@@ -70,25 +73,22 @@ public class CRUDVendas {
                     case '2': // Exibir Vendas entre Datas
                         exibirVendasEntreDatas();
                         break;
-                    case '3': // Exibir Vendas com Preço Maior que
-                        exibirVendasComPrecoMaiorQue();
-                        break;
-                    case '4': // Exibir Vendas por Modelo de Carro
+                    case '3': // Exibir Vendas por Modelo de Carro
                         exibirVendasPorModeloCarro();
                         break;
-                    case '5': // Criar Venda
+                    case '4': // Criar Venda
                         criarVenda();
                         break;
-                    case '6': // Atualizar Venda
+                    case '5': // Atualizar Venda
                         atualizarVenda();
                         break;
-                    case '7': // Remover Venda
+                    case '6': // Remover Venda
                         removerVenda();
                         break;
-                    case '8': // Exibir Todas as Vendas
+                    case '7': // Exibir Todas as Vendas
                         exibirTodasVendas();
                         break;
-                    case '0':
+                    case '8':
                         // Exibir uma Venda
                         int idVendaParaExibir = Integer.parseInt(JOptionPane.showInputDialog("ID da Venda"));
                         Venda vendaParaExibir = vendaDAO.findById(idVendaParaExibir).orElse(null);
@@ -98,7 +98,7 @@ public class CRUDVendas {
                             JOptionPane.showMessageDialog(null, "Venda não encontrada. Verifique o ID.");
                         }
                         break;
-                    case '9': // Menu anterior
+                    case '0': // Menu anterior
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Opção Inválida");
@@ -109,35 +109,41 @@ public class CRUDVendas {
                 JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
             }
 
-        } while(opcao != '9');
+        } while(opcao != '0');
     }
 
     private void exibirVendasPorMarcaCarro() {
+        // Método para exibir vendas filtradas por marca de carro
+        // Usa o JOptionPane para obter a marca e chama o método do DAO para encontrar as vendas correspondentes.
+        // Em seguida, chama o método para listar as vendas.
+
         String marca = JOptionPane.showInputDialog("Digite a marca do carro");
         List<Venda> vendas = vendaDAO.findByCarroMarca(marca);
         listarVendas(vendas);
     }
 
     private void exibirVendasEntreDatas() {
+        // Método para exibir vendas filtradas por um intervalo de datas
+        // Obtém as datas usando JOptionPane e chama o método do DAO para encontrar as vendas no intervalo.
+        // Chama o método para listar as vendas.
+
         LocalDate dataInicio = LocalDate.parse(JOptionPane.showInputDialog("Digite a data de início (AAAA-MM-DD)"));
         LocalDate dataFim = LocalDate.parse(JOptionPane.showInputDialog("Digite a data de fim (AAAA-MM-DD)"));
         List<Venda> vendas = vendaDAO.findVendasEntreDatas(dataInicio, dataFim);
         listarVendas(vendas);
     }
 
-    private void exibirVendasComPrecoMaiorQue() {
-        double preco = Double.parseDouble(JOptionPane.showInputDialog("Digite o preço mínimo"));
-        List<Venda> vendas = vendaDAO.findVendasComPrecoMaiorQue(preco);
-        listarVendas(vendas);
-    }
-
     private void exibirVendasPorModeloCarro() {
+        // Método para exibir vendas filtradas por modelo de carro
         String modelo = JOptionPane.showInputDialog("Digite o modelo do carro");
         List<Venda> vendas = vendaDAO.findByCarroModelo(modelo);
         listarVendas(vendas);
     }
 
     private void criarVenda() {
+        // Método para criar uma nova venda
+        // Verifica se o carro e cliente existem, então cria uma nova venda e a salva usando o DAO.
+
         String marcaCarro = JOptionPane.showInputDialog("Marca do Carro");
         String modeloCarro = JOptionPane.showInputDialog("Modelo do Carro");
         String cpfCliente = JOptionPane.showInputDialog("CPF do Cliente");
@@ -163,99 +169,38 @@ public class CRUDVendas {
         }
     }
 
-
-
-
     private void atualizarVenda() {
+        // Método para atualizar uma venda existente
+        // Obtém o ID da venda usando JOptionPane
+
         int idVenda = Integer.parseInt(JOptionPane.showInputDialog("ID da Venda"));
         Venda venda = vendaDAO.findById(idVenda).orElse(null);
 
         if (venda != null) {
+            // Obtém novas informações (marca, CPF do cliente, data) e atualiza a venda correspondente usando o DAO.
             String marcaCarro = JOptionPane.showInputDialog("Nova Marca do Carro");
             String cpfCliente = JOptionPane.showInputDialog("Novo CPF do Cliente");
             LocalDate data = LocalDate.parse(JOptionPane.showInputDialog("Nova Data da Venda (AAAA-MM-DD)"));
 
-            Double novoPrecoCarro = Double.parseDouble(JOptionPane.showInputDialog("Novo Preço do Carro"));
-
-            // Realize a consulta para encontrar vendas com preço maior que novoPrecoCarro
-            List<Venda> vendas = vendaDAO.findVendasComPrecoMaiorQue(novoPrecoCarro);
-
-            if (vendas.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Não existem vendas com preço maior que " + novoPrecoCarro);
+            Cliente cliente = buscaClientePorCpf(cpfCliente);
+            if (cliente != null) {
+                // Atualize as informações da venda
+                venda.getCarro().setMarca(marcaCarro);
+                venda.setCliente(cliente);
+                venda.setData(data);
+                vendaDAO.save(venda);
+                JOptionPane.showMessageDialog(null, "Venda atualizada com sucesso!");
             } else {
-                Venda vendaSelecionada = escolherVenda(vendas);
-                if (vendaSelecionada != null) {
-                    Cliente cliente = buscaClientePorCpf(cpfCliente);
-                    if (cliente != null) {
-                        vendaSelecionada.getCarro().setMarca(marcaCarro); // Atualize a marca do carro na venda
-                        vendaSelecionada.setCliente(cliente);
-                        vendaSelecionada.setData(data);
-                        vendaDAO.save(vendaSelecionada);
-                        JOptionPane.showMessageDialog(null, "Venda atualizada com sucesso!");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Cliente não encontrado. Verifique o CPF.");
-                    }
-                }
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado. Verifique o CPF.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Venda não encontrada. Verifique o ID.");
         }
     }
 
-    private Venda escolherVenda(List<Venda> vendas) {
-        // Crie um array de ‘strings’ para exibir as opções de vendas
-        String[] opcoes = new String[vendas.size()];
-
-        for (int i = 0; i < vendas.size(); i++) {
-            Venda venda = vendas.get(i);
-            opcoes[i] = "Venda ID: " + venda.getId() + " - Data: " + venda.getData() + " - Cliente: " + venda.getCliente().getNome();
-        }
-
-        // Exiba um diálogo para permitir que o usuário escolha uma venda
-        String vendaEscolhida = (String) JOptionPane.showInputDialog(null, "Escolha uma venda:", "Escolher Venda",
-                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-
-        // Analise a escolha do usuário para encontrar a venda correspondente
-        for (Venda venda : vendas) {
-            String vendaDescricao = "Venda ID: " + venda.getId() + " - Data: " + venda.getData() + " - Cliente: " + venda.getCliente().getNome();
-            if (vendaEscolhida.equals(vendaDescricao)) {
-                return venda;
-            }
-        }
-
-        // Se nenhuma venda correspondente for encontrada, retorne null
-        return null;
-    }
-
-
-    private Carro escolherCarro(List<Carro> carros) {
-        // Crie um array de 'Strings' para exibir as opções de carros
-        String[] opcoes = new String[carros.size()];
-
-        for (int i = 0; i < carros.size(); i++) {
-            Carro carro = carros.get(i);
-            opcoes[i] = carro.getMarca() + " " + carro.getModelo() + " (ID: " + carro.getId() + ")";
-        }
-
-        // Exiba um diálogo para permitir que o usuário escolha um carro
-        String carroEscolhido = (String) JOptionPane.showInputDialog(null, "Escolha um carro:", "Escolher Carro",
-                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-
-        // Analise a escolha do usuário para encontrar o carro correspondente
-        for (Carro carro : carros) {
-            String carroDescricao = carro.getMarca() + " " + carro.getModelo() + " (ID: " + carro.getId() + ")";
-            if (carroEscolhido.equals(carroDescricao)) {
-                return carro;
-            }
-        }
-
-        // Se nenhum carro correspondente for encontrado, retorne null
-        return null;
-    }
-
-
-
     private Cliente buscaClientePorCpf(String cpfCliente) {
+        // Método para buscar um cliente por CPF no DAO
+        // Retorna o cliente se encontrado, senão exibe uma mensagem de erro e retorna null.
         Cliente cliente = clienteDAO.buscaPorCpf(cpfCliente);
 
         if (cliente != null) {
@@ -268,6 +213,8 @@ public class CRUDVendas {
     
 
     private void removerVenda() {
+        // Método para remover uma venda
+
         int idVenda = Integer.parseInt(JOptionPane.showInputDialog("ID da Venda"));
         Venda venda = vendaDAO.findById(idVenda).orElse(null);
 
@@ -283,4 +230,6 @@ public class CRUDVendas {
         List<Venda> vendas = vendaDAO.findAll();
         listarVendas(vendas);
     }
+
+
 }

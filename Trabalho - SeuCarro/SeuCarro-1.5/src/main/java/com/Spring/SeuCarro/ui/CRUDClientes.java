@@ -11,9 +11,11 @@ import java.util.List;
 @Slf4j
 @Component
 public class CRUDClientes {
+
     @Autowired
     private ClienteDAO clienteDAO;
 
+    // Método para obter detalhes do cliente
     public void obterCliente(Cliente cliente) {
         cliente.setNome(JOptionPane.showInputDialog("Nome", cliente.getNome()));
         cliente.setLastName(JOptionPane.showInputDialog("Last Name", cliente.getLastName()));
@@ -21,6 +23,7 @@ public class CRUDClientes {
         cliente.setFone(JOptionPane.showInputDialog("Fone", cliente.getFone()));
     }
 
+    // Método para exibir uma lista de clientes
     public void listaClientes(List<Cliente> clientes) {
         StringBuilder listagem = new StringBuilder();
         for (Cliente cl : clientes) {
@@ -29,10 +32,12 @@ public class CRUDClientes {
         JOptionPane.showMessageDialog(null, listagem.isEmpty() ? "Nenhum cliente encontrado" : listagem);
     }
 
+    // Método para exibir detalhes de um cliente específico
     public void listaCliente(Cliente cl) {
         JOptionPane.showMessageDialog(null, cl == null ? "Nenhum cliente encontrado" : cl.toString());
     }
 
+    // Método para exibir o menu de operações relacionadas a clientes
     public void menu() {
         StringBuilder menu = new StringBuilder("Menu Clientes\n")
                 .append("1 - Inserir\n")
@@ -112,5 +117,4 @@ public class CRUDClientes {
             }
         } while (!opcao.equals("8"));
     }
-
 }

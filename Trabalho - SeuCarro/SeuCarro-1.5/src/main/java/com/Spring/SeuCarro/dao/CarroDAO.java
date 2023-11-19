@@ -13,15 +13,11 @@ import java.util.List;
 @Primary
 public interface CarroDAO extends JpaRepository<Carro, Integer> {
 
-    // Consulta nomeada "carroPorMarca" está definida na classe Carro
-    @Query(name = "carroPorMarca")
-    List<Carro> findByMarca(String marca);
-
     // JPQL retorna uma lista de carro abaixo de um preço máximo
     @Query("SELECT c FROM Carro as c WHERE c.preco < :maxPreco")
     List<Carro> findCarrosComPrecoMenorQue(Double maxPreco);
 
-    // Native Query
+
     @Query("SELECT c FROM Carro c WHERE c.anoFabricacao = :anoFabricacao")
     List<Carro> findByAnoFabricacao(@Param("anoFabricacao") Integer anoFabricacao);
 
