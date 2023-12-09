@@ -1,0 +1,13 @@
+https://youtu.be/2ssvhDEZvLs - Base
+
+Esta etapa consiste em adicionar DAOs específicos para o MongoDB usando com Spring Boot e Spring Data para que todas as funcionalidades planejadas desde a Etapa 0 possam ser executadas via JPA (usando SQLite e PostgreSQL), além de via MongoDB também.
+
+Melhoras nas etapas anteriores são desejáveis. Evitar o uso de EAGER, por exemplo.
+
+Diversifique as consultas usando diferentes filtros e agregações.
+
+Como o MongoDB permite documentos com objetos aninhados, a modelagem do MongoDB em termos de collections, usualmente é diferente da modelagem de tabelas do modelo relacional. Ou seja: você não precisa ter no MongoDB as mesmas "tabelas" que tinha no relacional, mas precisa modelar de modo que a nova modelagem permita realizar as mesmas funcionalidades, que você fazia sobre o modelo relacional.
+
+O tutorial a seguir está bastante relacionado à etapa final do trabalho prático: Spring Boot and MongoDB.
+
+Crie também um arquivo (divisao_tarefas.txt) detalhando a divisão de tarefas e mostrando o que cada membro da dupla efetivamente fez no trabalho. Divida as tarefas definidas entre os membros da dupla.
