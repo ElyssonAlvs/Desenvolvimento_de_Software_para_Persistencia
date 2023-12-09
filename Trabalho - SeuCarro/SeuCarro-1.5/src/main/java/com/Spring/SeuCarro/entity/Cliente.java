@@ -2,7 +2,7 @@ package com.Spring.SeuCarro.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
+
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Cliente {
     @Column(unique = true, nullable = false)
     private String cpf;
 
-    @NotNull
+
     @Column(nullable = false)
     private String fone;
 
