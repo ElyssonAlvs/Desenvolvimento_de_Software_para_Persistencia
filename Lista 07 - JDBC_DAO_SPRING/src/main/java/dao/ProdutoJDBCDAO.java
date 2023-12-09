@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.sql.init.dependency.DependsOnDatabaseInitialization;
 import org.springframework.stereotype.Repository;
 import entity.Produto;
 
 
+@DependsOnDatabaseInitialization
 @Repository // Marca a classe como um componente gerenciado pelo Spring
 public class ProdutoJDBCDAO implements ProdutoDAO {
 
