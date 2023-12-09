@@ -1,0 +1,7 @@
+- enviou desnecessariamente a pasta .git (repositório local, que ocupa bastante espaço)
+- enviou o código com erro de compilação: usou Integer ao invés de String nas classes de JPADAO.
+- mongo funciona, mas jpa, não.
+- necessidade de digitar manualmente marca, modelo.
+- ausência total de consultas com algum tipo de função de agregação.
+
+Nota: 7,0

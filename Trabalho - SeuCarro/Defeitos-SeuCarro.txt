@@ -1,0 +1,8 @@
+- não enviou projeto maven
+- erro de compilação no projeto enviado.
+- sem cabeçalho csv
+- decimais de saldo usando ,
+- nomes dos arquivos hard coded
+- gerou json e xml vazios
+
+Nota: 7,5

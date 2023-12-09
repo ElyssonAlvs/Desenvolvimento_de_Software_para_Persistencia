@@ -1,0 +1,5 @@
+- não usou caixa de seleção para selecionar associação (necessidade de ids digitados manualmente)
+- Tem de que digitar o nome da marca completo. Poderia ser caixa de seleção.
+- marca e modelo como strings
+
+Nota: 8,5
