@@ -1,0 +1,9 @@
+[ {
+  "id" : 1,
+  "modelo" : "Palio",
+  "marca" : "Fiat",
+  "configuracao" : "Manual",
+  "anoFabricacao" : 2023,
+  "tipoCombustivel" : "Gasolina",
+  "preco" : 23000.0
+} ]

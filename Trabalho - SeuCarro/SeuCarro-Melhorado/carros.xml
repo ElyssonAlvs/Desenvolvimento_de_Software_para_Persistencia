@@ -1,0 +1,11 @@
+<ArrayList>
+  <item>
+    <id>1</id>
+    <modelo>Palio</modelo>
+    <marca>Fiat</marca>
+    <configuracao>Manual</configuracao>
+    <anoFabricacao>2023</anoFabricacao>
+    <tipoCombustivel>Gasolina</tipoCombustivel>
+    <preco>23000.0</preco>
+  </item>
+</ArrayList>
