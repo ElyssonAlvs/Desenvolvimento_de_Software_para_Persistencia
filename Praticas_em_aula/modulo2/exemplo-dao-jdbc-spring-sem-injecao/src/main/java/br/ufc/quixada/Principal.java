@@ -5,8 +5,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.ufc.quixada.dao.ClienteDAO;
-import br.ufc.quixada.dao.ClienteJDBCDAO;
-import br.ufc.quixada.dao.ClienteListDAO;
 import br.ufc.quixada.dao.ClienteSpringJDBCDAO;
 import br.ufc.quixada.entity.Cliente;
 import lombok.extern.slf4j.Slf4j;

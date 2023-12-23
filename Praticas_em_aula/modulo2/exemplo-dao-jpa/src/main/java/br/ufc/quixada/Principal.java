@@ -5,10 +5,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.ufc.quixada.dao.ClienteDAO;
-import br.ufc.quixada.dao.ClienteJDBCDAO;
 import br.ufc.quixada.dao.ClienteJPADAO;
-import br.ufc.quixada.dao.ClienteListDAO;
-import br.ufc.quixada.dao.ClienteSpringJDBCDAO;
 import br.ufc.quixada.entity.Cliente;
 
 public class Principal {
