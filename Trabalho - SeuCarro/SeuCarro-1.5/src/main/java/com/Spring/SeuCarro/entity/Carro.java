@@ -1,7 +1,10 @@
 package com.Spring.SeuCarro.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @NamedQuery(name = "carroPorMarca", query = "SELECT c from Carro c WHERE c.marca ilike :marca")
 

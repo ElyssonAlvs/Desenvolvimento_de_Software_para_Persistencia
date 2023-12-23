@@ -63,8 +63,6 @@ public class CRUDVendas {
         char opcao = '0';
         do {
             try {
-                Venda venda;
-                int id;
                 opcao = JOptionPane.showInputDialog(menu).charAt(0);
                 switch (opcao) {
                     case '1': // Exibir Vendas por Marca de Carro
