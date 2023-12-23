@@ -20,10 +20,14 @@ public class JsonData {
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
             // Escreve o JSON no arquivo de saída
-            objectMapper.writeValue(new File(NOME_ARQUIVO_JSON), carros);
-            System.out.println("Dados convertidos para JSON com sucesso.");
-        } catch (IOException e) {
-            // Se ocorrer um erro ao escrever o arquivo JSON, lança uma exceção IOException
+            try {
+                objectMapper.writeValue(new File(NOME_ARQUIVO_JSON), carros);
+                System.out.println("Dados convertidos para JSON com sucesso.");
+            } catch (IOException e) {
+                System.out.println("Erro ao escrever o arquivo JSON: " + e.getMessage());
+            }
+
+        } catch (Exception e) {
             System.out.println("Erro ao converter dados para JSON: " + e.getMessage());
         }
     }

@@ -37,11 +37,9 @@ public class HashCalculator {
             // Retorna o hash SHA-256 como uma string em hexadecimal
             return hashBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
-            // Se ocorrer um erro ao encontrar o algoritmo de hash, lança uma exceção IOException
             throw new RuntimeException("Algoritmo de hash não suportado.", e);
         } catch (IOException e) {
-            // Se ocorrer um erro ao ler o arquivo, lança uma exceção IOException
-            throw new RuntimeException("Erro ao ler o arquivo CSV para calcular o hash.", e);
+            throw new RuntimeException("Erro ao calcular o hash do arquivo CSV.", e);
         }
     }
 }

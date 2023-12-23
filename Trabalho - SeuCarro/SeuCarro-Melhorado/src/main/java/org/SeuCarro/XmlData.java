@@ -20,10 +20,13 @@ public class XmlData {
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
             // Escreve o XML no arquivo de saída especificado
-            xmlMapper.writeValue(new File(NOME_ARQUIVO_XML), carros);
-            System.out.println("Dados convertidos para XML com sucesso.");
-        } catch (IOException e) {
-            // Se ocorrer um erro ao escrever o arquivo XML, lança uma exceção IOException
+            try {
+                xmlMapper.writeValue(new File(NOME_ARQUIVO_XML), carros);
+                System.out.println("Dados convertidos para XML com sucesso.");
+            } catch (IOException e) {
+                System.out.println("Erro ao escrever o arquivo XML: " + e.getMessage());
+            }
+        } catch (Exception e) {
             System.out.println("Erro ao converter dados para XML: " + e.getMessage());
         }
     }

@@ -16,27 +16,28 @@ public class CsvDataLer {
         List<Carro> carros = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(NOME_ARQUIVO_CSV))) {
-            // Pular o cabeçalho
-            br.readLine();
-
             String linha;
 
-            while ((linha = br.readLine()) != null) {
-                String[] partes = linha.split(",");
+            // Verifica se o arquivo não está vazio antes de tentar ler
+            if ((linha = br.readLine()) != null) {
+                // Pular o cabeçalho
+                while ((linha = br.readLine()) != null) {
+                    String[] partes = linha.split(",");
 
-                if (partes.length == 7) {
-                    int id = Integer.parseInt(partes[0]);
-                    String modelo = partes[1];
-                    String marca = partes[2];
-                    String configuracao = partes[3];
-                    int anoFabricacao = Integer.parseInt(partes[4]);
-                    String tipoCombustivel = partes[5];
+                    if (partes.length == 7) {
+                        int id = Integer.parseInt(partes[0]);
+                        String modelo = partes[1];
+                        String marca = partes[2];
+                        String configuracao = partes[3];
+                        int anoFabricacao = Integer.parseInt(partes[4]);
+                        String tipoCombustivel = partes[5];
 
-                    // Ajuste: substituir ',' por '.' no preço antes de fazer o parse
-                    double preco = Double.parseDouble(partes[6].replace(',', '.'));
+                        // Ajuste: substituir ',' por '.' no preço antes de fazer o parse
+                        double preco = Double.parseDouble(partes[6].replace(',', '.'));
 
-                    Carro carro = new Carro(id, modelo, marca, configuracao, anoFabricacao, tipoCombustivel, preco);
-                    carros.add(carro);
+                        Carro carro = new Carro(id, modelo, marca, configuracao, anoFabricacao, tipoCombustivel, preco);
+                        carros.add(carro);
+                    }
                 }
             }
         } catch (IOException e) {

@@ -14,6 +14,10 @@ public class CsvData {
 
     // Adiciona um cabeçalho ao arquivo CSV
     static {
+        adicionarCabecalho();
+    }
+
+    private static void adicionarCabecalho() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(NOME_ARQUIVO_CSV, true))) {
             writer.println("ID,Modelo,Marca,Configuracao,AnoFabricacao,TipoCombustivel,Preco");
         } catch (IOException e) {

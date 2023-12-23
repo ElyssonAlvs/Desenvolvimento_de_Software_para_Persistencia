@@ -13,7 +13,7 @@ public class CsvDataContador {
             int contador = 0;
 
             // Pular o cabeçalho
-            br.readLine();
+            pularCabecalho(br);
 
             // Lê cada linha do arquivo CSV até que não haja mais linhas
             while (br.readLine() != null) {
@@ -26,5 +26,9 @@ public class CsvDataContador {
             System.out.println("Erro ao contar entidades no arquivo CSV: " + e.getMessage());
             return 0; // Retorna 0 em caso de erro
         }
+    }
+
+    private static void pularCabecalho(BufferedReader br) throws IOException {
+        br.readLine(); // Lê e descarta a linha do cabeçalho
     }
 }

@@ -1,2 +1,5 @@
 ID,Modelo,Marca,Configuracao,AnoFabricacao,TipoCombustivel,Preco
-1,Palio,Fiat,Manual,2023,Gasolina,23000.00
+1,Palio,Fiat,Manual,2017,Gasolina,23000.00
+ID,Modelo,Marca,Configuracao,AnoFabricacao,TipoCombustivel,Preco
+2,Civic,Honda,Automático,2023,Gasolina,30000.00
+3,Siena,Fiat,Manual,2014,Gasolina,25000.00
