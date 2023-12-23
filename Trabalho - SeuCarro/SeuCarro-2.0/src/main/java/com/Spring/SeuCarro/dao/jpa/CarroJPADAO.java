@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CarroJPADAO extends CarroDAO, JpaRepository<Carro, Integer> {
+public interface CarroJPADAO extends CarroDAO, JpaRepository<Carro, String> {
 
     // JPQL retorna uma lista de carro abaixo de um preço máximo
     @Query("SELECT c FROM Carro as c WHERE c.preco < :maxPreco")

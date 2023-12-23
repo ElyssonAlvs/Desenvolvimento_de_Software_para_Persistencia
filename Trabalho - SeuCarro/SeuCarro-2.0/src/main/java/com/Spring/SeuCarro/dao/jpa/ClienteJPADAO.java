@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClienteJPADAO extends ClienteDAO, JpaRepository<Cliente, Integer> {
+public interface ClienteJPADAO extends ClienteDAO, JpaRepository<Cliente, String> {
 
     @Query(name = "clientePorCpf")
     Cliente buscaPorCpf(@Param("cpf") String cpf);

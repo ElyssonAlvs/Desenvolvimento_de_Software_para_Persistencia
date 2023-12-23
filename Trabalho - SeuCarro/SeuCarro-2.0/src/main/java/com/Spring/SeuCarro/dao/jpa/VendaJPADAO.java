@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface VendaJPADAO extends VendaDAO, JpaRepository<Venda, Integer> {
+public interface VendaJPADAO extends VendaDAO, JpaRepository<Venda, String> {
 
     List<Venda> findByCarroMarca(String marca);
 
